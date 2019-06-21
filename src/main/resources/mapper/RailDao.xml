@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdxx.dao.RailDao">
+	<resultMap type="com.gdxx.entity.Rail" id="railResult">
+		<result property="railId" column="rail_id" />
+		<result property="railCode" column="rail_code" />
+		<result property="departureTime" column="departure_time" />
+		<result property="arriveTime" column="arrive_time" />
+		<result property="consumeTime" column="consume_time" />
+		<result property="firstSeatPrice" column="first_seat_price" />
+		<result property="secondSeatPrice" column="second_seat_price" />
+		<result property="businessSeatPrice"
+			column="business_seat_price" />
+		<association property="departurePlace"
+			column="departure_place_id" javaType="com.gdxx.entity.Sites">
+			<id column="site_id" property="siteId" />
+			<result column="site_name" property="siteName" />
+			<result column="site_lat" property="siteLat" />
+			<result column="site_lng" property="siteLng" />
+			<result column="city_name" property="cityName" />
+		</association>
+		<association property="stopoverStation"
+			column="stopover_station_id" javaType="com.gdxx.entity.Sites">
+			<id column="site_id2" property="siteId" />
+			<result column="site_name2" property="siteName" />
+			<result column="site_lat2" property="siteLat" />
+			<result column="site_lng2" property="siteLng" />
+			<result column="city_name2" property="cityName" />
+		</association>
+	</resultMap>
+
+	<sql id="flight_message">r.rail_id,r.rail_code,r.departure_time,r.arrive_time,r.consume_time,r.first_seat_price,r.second_seat_price,r.business_seat_price,
+		s1.site_id,s1.site_lat,s1.site_lng,s1.site_name,s1.city_name,
+		s2.site_id as site_id2,s2.site_lat as site_lat2,s2.site_lng as
+		site_lng2,s2.site_name as site_name2,s2.city_name as city_name2
+	</sql>
+
+	<sql id="table_from">rail r join sites s1 on r.departure_place_id=s1.site_id
+		join
+		sites s2 on r.stopover_station_id=s2.site_id
+	</sql>
+
+	<select id="queryRailList" resultMap="railResult">
+		SELECT
+		<include refid="flight_message" />
+		FROM
+		<include refid="table_from" />
+		where
+		s1.city_name=#{cityName}
+		and r.departure_time &gt; #{departTime}
+		order by r.departure_time;
+	</select>
+
+
+
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdxx.dao.SubwayScheduleDao">
+	<sql id="subway_schedule_sql">
+		schedule_id,station_name,first_car_time,last_car_time,line_id
+	</sql>
+	<select id="querySubwayScheduleByNameAndId"
+		resultType="com.gdxx.entity.SubwaySchedule">
+		select
+		<include refid="subway_schedule_sql" />
+		from subway_schedule where line_id=#{lineId} and station_name =
+		#{stationName}
+	</select>
+
+</mapper>

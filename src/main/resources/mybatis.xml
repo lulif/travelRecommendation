@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 获取数据库自增主键 -->
+		<setting name="useGeneratedKeys" value="true" />
+		<!-- 駝峰命名 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 使用别名替代列标签   默认：true -->
+		<setting name="useColumnLabel" value="true" />
+	</settings>
+
+</configuration>

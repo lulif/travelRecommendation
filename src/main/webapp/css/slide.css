@@ -1,0 +1,86 @@
+.state-title{
+	position:relative;
+	top:5%;
+	font-size:20px;
+	font-weight:400;
+}
+
+.adjustFocus {
+	display: inline-block;
+	position: absolute;
+	top: 30%;
+	left: 30%;
+	width: 70%;
+	height: 5%;
+}
+
+.adjustFocus .focus_title {
+	color: white;
+	font-size: 15px;
+	margin: 3% auto;
+	text-align: center;
+	/*background-color: seagreen;*/
+}
+
+.progress_back_div {
+	height: 30px;
+	width: 100%;
+	margin-top: 3%;
+	/*background-color: salmon;*/
+	display: inline-block;
+	text-align: center;
+}
+
+.progress_back_div img {
+	display: inline-block;
+	vertical-align: middle;
+}
+/*进度条*/
+.progress {
+	margin-left: -5%;
+	margin-right: 2%;
+	display: inline-block;
+	position: relative;
+	width: 120px;
+}
+
+.progress_bg {
+	height: 5px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	overflow: hidden;
+	background-color: #f2f2f2;
+}
+
+.progress_bar {
+	background: red;
+	width: 0;
+	height: 5px;
+	border-radius: 5px;
+	position: relative;
+	right: 0;
+}
+/*进度条圆点按钮*/
+.progress_btn {
+	width: 16px;
+	height: 16px;
+	border-radius: 8px;
+	background: #fff;
+	position: absolute;
+	left: 0px;
+	margin-left: -8px;
+	top: -5px;
+	cursor: pointer;
+	border: 2px #bbbbbb solid;
+	box-sizing: border-box;
+}
+
+.reduce_img, .add_img {
+	font-size: 20px;
+	font-weight: 400;
+	color: white;
+	cursor: pointer;
+	position: relative;
+	top: -45%;
+	left: -5%;
+}

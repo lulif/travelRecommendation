@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdxx.dao.SubwayLinesDao">
+	<select id="querySubwayLinesByLineId"
+		resultType="com.gdxx.entity.SubwayLines">
+		select line_id,line_name,city_name from subway_lines where
+		line_id=#{lineId}
+	</select>
+
+	<select id="querySubwayLineByLineName"
+		resultType="com.gdxx.entity.SubwayLines">
+		select line_id,line_name,city_name from subway_lines where
+		city_name=#{cityName} and line_name like #{lineName} '%';
+	</select>
+</mapper>

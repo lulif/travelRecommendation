@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdxx.dao.SubwayTransferDao">
+	<select id="querySubwayTransferList"
+		resultType="com.gdxx.entity.SubwayTransfer">
+		select
+		transfer_id,station_name,line_from,line_to,spend_time from
+		subway_transfer;
+	</select>
+
+
+	<select id="querySubwayTransferByNameAndFromTo"
+		resultType="com.gdxx.entity.SubwayTransfer">
+		select
+		transfer_id,station_name,line_from,line_to,spend_time from
+		subway_transfer where station_name=#{stationName} and
+		line_to=#{lineTo} and line_from=#{lineFrom};
+	</select>
+
+
+</mapper>

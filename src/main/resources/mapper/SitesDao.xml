@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdxx.dao.SitesDao">
+	<sql id="site_message">site_id,site_name,site_lat,site_lng,city_name</sql>
+	<select id="querySitesList" resultType="com.gdxx.entity.Sites">
+		select
+		<include refid="site_message" />
+		from
+		sites;
+	</select>
+
+	<select id="querySitesCount" resultType="int">
+		select count(1) from
+		sites;
+	</select>
+
+	<select id="querySiteById" resultType="com.gdxx.entity.Sites">
+		select
+		<include refid="site_message" />
+		from sites where site_id=#{siteId}
+	</select>
+
+</mapper>
