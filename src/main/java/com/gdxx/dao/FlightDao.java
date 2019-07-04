@@ -5,22 +5,22 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.gdxx.entity.Flight;
+
 /*
  * 航班Dao接口
  */
 public interface FlightDao {
-	/* 
-	 * departTime 格式:00:00
-	 */
-	List<Flight> queryFlightList(@Param("cityName") String cityName, @Param("departTime") String departTime);
+    /*
+     * departTime 格式:00:00
+     */
+    int queryFlightsCountByCityName(String cityName);
 
-	List<Flight> queryFlightOrderByPrice(@Param("cityName") String cityName, @Param("departTime") String departTime);
+    int updateFlightScore(Flight flight);
 
-	List<Flight> queryFligtOrderByRate(@Param("cityName") String cityName, @Param("departTime") String departTime);
+    List<Flight> queryFlightListByCityName(String cityName);
 
-	List<Flight> queryFlightOrderByPriceAndRate(@Param("cityName") String cityName,
-			@Param("departTime") String departTime);
+    List<Flight> queryFlightListOrderByDepartTime(@Param("cityName") String cityName,
+                                                  @Param("departTime") String departTime);
 
-	List<Flight> queryFlightOrderByRateAndPrice(@Param("cityName") String cityName,
-			@Param("departTime") String departTime);
+
 }

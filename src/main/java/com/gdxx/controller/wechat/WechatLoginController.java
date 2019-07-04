@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.gdxx.beans.WechatUser;
+import com.gdxx.base.WechatUser;
 import com.gdxx.dto.UserAccessToken;
 import com.gdxx.entity.User;
 import com.gdxx.service.UserService;

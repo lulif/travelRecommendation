@@ -1,4 +1,4 @@
-package com.gdxx.beans;
+package com.gdxx.base;
 
 import java.util.List;
 

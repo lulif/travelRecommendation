@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.gdxx.beans.JedisPoolWriper;
+import com.gdxx.base.JedisPoolWriper;
 import com.gdxx.utils.JedisUtil;
 
 import redis.clients.jedis.JedisPoolConfig;

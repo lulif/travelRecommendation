@@ -1,117 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdxx.dao.FlightDao">
-	<resultMap type="com.gdxx.entity.Flight" id="flightResult">
-		<result property="flightId" column="flight_id" />
-		<result property="flightName" column="flight_name" />
-		<result property="aircraftType" column="aircraft_type" />
-		<result property="aircraftTypeCode" column="aircraft_type_code" />
-		<result property="departureTime" column="departure_time" />
-		<result property="arriveTime" column="arrive_time" />
-		<result property="flightPrice" column="flight_price" />
-		<result property="discountMethod" column="discount_method" />
-		<result property="punctualityRate" column="punctuality_rate" />
-		<association property="departurePlace"
-			column="departure_place_id" javaType="com.gdxx.entity.Sites">
-			<id column="site_id" property="siteId" />
-			<result column="site_name" property="siteName" />
-			<result column="site_lat" property="siteLat" />
-			<result column="site_lng" property="siteLng" />
-			<result column="city_name" property="cityName" />
-		</association>
-		<association property="destinationPlace"
-			column="destination_place_id" javaType="com.gdxx.entity.Sites">
-			<id column="site_id2" property="siteId" />
-			<result column="site_name2" property="siteName" />
-			<result column="site_lat2" property="siteLat" />
-			<result column="site_lng2" property="siteLng" />
-			<result column="city_name2" property="cityName" />
-		</association>
-	</resultMap>
+    <resultMap type="com.gdxx.entity.Flight" id="flightResult">
+        <result property="flightId" column="flight_id"/>
+        <result property="flightName" column="flight_name"/>
+        <result property="aircraftType" column="aircraft_type"/>
+        <result property="aircraftTypeCode" column="aircraft_type_code"/>
+        <result property="departureTime" column="departure_time"/>
+        <result property="arriveTime" column="arrive_time"/>
+        <result property="flightPrice" column="flight_price"/>
+        <result property="discountMethod" column="discount_method"/>
+        <result property="punctualityRate" column="punctuality_rate"/>
+        <result property="economicScore" column="economic_score"/>
+        <result property="timeScore" column="time_score"/>
+        <result property="loadBearingScore" column="load_bearing_score"/>
+        <result property="esGradeNumber" column="es_grade_number"/>
+        <result property="tsGradeNumber" column="ts_grade_number"/>
+        <result property="lbsGradeNumber" column="lbs_grade_number"/>
+        <association property="departurePlace"
+                     column="departure_place_id" javaType="com.gdxx.entity.Sites">
+            <id column="site_id" property="siteId"/>
+            <result column="site_name" property="siteName"/>
+            <result column="site_lat" property="siteLat"/>
+            <result column="site_lng" property="siteLng"/>
+            <result column="city_name" property="cityName"/>
+        </association>
+        <association property="destinationPlace"
+                     column="destination_place_id" javaType="com.gdxx.entity.Sites">
+            <id column="site_id2" property="siteId"/>
+            <result column="site_name2" property="siteName"/>
+            <result column="site_lat2" property="siteLat"/>
+            <result column="site_lng2" property="siteLng"/>
+            <result column="city_name2" property="cityName"/>
+        </association>
+    </resultMap>
 
-	<sql id="flight_message">f.flight_id,f.flight_name,f.aircraft_type,f.aircraft_type_code,f.departure_time,
-		s1.site_id,s1.site_lat,s1.site_lng,s1.site_name,s1.city_name,
-		s2.site_id as site_id2,s2.site_lat as site_lat2,s2.site_lng as
-		site_lng2,s2.site_name as site_name2,s2.city_name as city_name2,
-		f.arrive_time,f.flight_price,f.discount_method,f.punctuality_rate
-	</sql>
+    <sql id="flight_message">f.flight_id,f.flight_name,f.aircraft_type,f.aircraft_type_code,f.departure_time,
+        s1.site_id,s1.site_lat,s1.site_lng,s1.site_name,s1.city_name,
+        s2.site_id as site_id2,s2.site_lat as site_lat2,s2.site_lng as
+        site_lng2,s2.site_name as site_name2,s2.city_name as city_name2,
+        f.arrive_time,f.flight_price,f.discount_method,f.punctuality_rate,
+        f.time_score,f.economic_score,f.load_bearing_score,f.es_grade_number,
+        f.ts_grade_number,f.lbs_grade_number
+    </sql>
 
-	<sql id="table_from">flight f join sites s1 on f.departure_place_id=s1.site_id
-		join
-		sites s2 on f.destination_place_id=s2.site_id
-	</sql>
-	
-	
-	<select id="queryFlightList" resultMap="flightResult">
-		SELECT
-		<include refid="flight_message" />
-		FROM
-		<include refid="table_from" />
-		where
-		s1.city_name=#{cityName}
-		and f.departure_time &gt; #{departTime}
-		order
-		by
-		departure_time asc
-	</select>
-
-	<select id="queryFlightOrderByPrice" resultMap="flightResult">
-		SELECT
-		<include refid="flight_message" />
-		FROM
-		<include refid="table_from" />
-		where
-		s1.city_name=#{cityName}
-		and f.departure_time &gt; #{departTime}
-		order
-		by
-		flight_price asc;
-	</select>
-
-	<select id="queryFligtOrderByRate"
-		resultMap="flightResult">
-		SELECT
-		<include refid="flight_message" />
-		FROM
-		<include refid="table_from" />
-		where
-		s1.city_name=#{cityName}
-		and f.departure_time &gt; #{departTime}
-		order
-		by
-		departure_time asc, punctuality_rate desc;
-	</select>
-
-	<select id="queryFlightOrderByPriceAndRate"
-		resultMap="flightResult">
-		SELECT
-		<include refid="flight_message" />
-		FROM
-		<include refid="table_from" />
-		where
-		s1.city_name=#{cityName}
-		and f.departure_time &gt; #{departTime}
-		order
-		by
-		flight_price asc, punctuality_rate desc;
-	</select>
-
-	<select id="queryFlightOrderByRateAndPrice"
-		resultMap="flightResult">
-		SELECT
-		<include refid="flight_message" />
-		FROM
-		<include refid="table_from" />
-		where
-		s1.city_name=#{cityName}
-		and f.departure_time &gt; #{departTime}
-		order
-		by
-		departure_time asc,punctuality_rate desc, flight_price asc;
-	</select>
+    <sql id="table_from">flight f join sites s1 on f.departure_place_id=s1.site_id
+        join
+        sites s2 on f.destination_place_id=s2.site_id
+    </sql>
 
 
+    <select id="queryFlightListByCityName" resultMap="flightResult">
+        SELECT
+        <include refid="flight_message"/>
+        FROM
+        <include refid="table_from"/>
+        <where>
+            s1.city_name=#{cityName}
+        </where>
+    </select>
+
+    <select id="queryFlightsCountByCityName" resultType="int">
+        select count(*) from flight f join sites s
+        on f.departure_place_id = s.site_id where s.city_name=#{cityName}
+    </select>
+
+    <update id="updateFlightScore" parameterType="com.gdxx.entity.Flight">
+        update flight set economic_score=#{economicScore},
+        time_score=#{timeScore},load_bearing_score=#{loadBearingScore},
+        lbs_grade_number=#{lbsGradeNumber},es_grade_number=#{esGradeNumber},
+        ts_grade_number=#{tsGradeNumber}
+        where flight_id=#{flightId}
+    </update>
+
+    <select id="queryFlightListOrderByDepartTime" resultMap="flightResult">
+        SELECT
+        <include refid="flight_message"/>
+        FROM
+        <include refid="table_from"/>
+        <where>
+            s1.city_name=#{cityName}
+            and f.departure_time &gt;= #{departTime}
+        </where>
+        order by f.departure_time
+    </select>
 
 </mapper>

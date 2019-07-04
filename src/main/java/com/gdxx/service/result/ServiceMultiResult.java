@@ -12,8 +12,29 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@AllArgsConstructor
 public class ServiceMultiResult<T> {
-	private int total;
-	private List<T> result;
+    private boolean success;
+    private int total;
+    private List<T> result;
+
+    public ServiceMultiResult(boolean success) {
+        this.success = success;
+    }
+
+    public ServiceMultiResult(boolean success, int total, List<T> result) {
+        this.success = success;
+        this.total = total;
+        this.result = result;
+    }
+
+    public static <T> ServiceMultiResult<T> success() {
+        return new ServiceMultiResult<>(true);
+    }
+
+    public static <T> ServiceMultiResult<T> of(List<T> result) {
+        ServiceMultiResult<T> ServiceMultiResult = new ServiceMultiResult<>(true);
+        ServiceMultiResult.setResult(result);
+        return ServiceMultiResult;
+    }
+
 }

@@ -1,0 +1,3 @@
+2019-07-04 14:26:24.123[restartedMain]INFO  com.gdxx.TravelRecommendationApplication-Starting TravelRecommendationApplication on DESKTOP-UL86A29 with PID 1140 (C:\Users\lulif\IdeaProjects\travelRecommendation\target\classes started by lulif in C:\Users\lulif\IdeaProjects\travelRecommendation)
+2019-07-04 14:26:24.133[restartedMain]INFO  com.gdxx.TravelRecommendationApplication-No active profile set, falling back to default profiles: default
+2019-07-04 14:26:31.150[restartedMain]INFO  com.gdxx.TravelRecommendationApplication-Started TravelRecommendationApplication in 7.556 seconds (JVM running for 8.691)

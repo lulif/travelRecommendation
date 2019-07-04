@@ -3,7 +3,6 @@ package com.gdxx.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gdxx.base.ExceptionResolver;
 import com.gdxx.dao.UserDao;
 import com.gdxx.entity.User;
 import com.gdxx.service.UserService;
@@ -28,7 +27,7 @@ public class UserServiceImpl implements UserService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ExceptionResolver("用户注册异常");
+			throw new RuntimeException("用户注册异常");
 		}
 		return new ServiceResult<>(false);
 	}

@@ -1,257 +1,263 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet"
-	href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-<link rel="stylesheet"
-	href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
-<link rel="stylesheet" href="/css/slide.css" />
-<title>首页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet"
+          href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet"
+          href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <link rel="stylesheet" href="/css/slide.css"/>
+    <link rel="stylesheet" href="/css/jquery.autocomplete.css">
+    <title>首页</title>
 </head>
 <body>
-	<div class="page">
-		<header class="bar bar-nav" style="background-color: blue">
-			<a class="icon icon-me pull-left" id="user" style="color: white"></a>
-			<h1 class="title" style="color: white; font-weight: 600">旅客行程智能推荐系统</h1>
-		</header>
-		<nav class="bar bar-tab">
-			<a class="tab-item active" href="#"> <span class="icon icon-home"></span>
-				<span class="tab-label">首页</span>
-			</a> <a class="tab-item external" href="/linkToRoute"> <span
-				class="icon icon-search"></span><span class="tab-label">路线</span>
-			</a>
-		</nav>
+<div class="page">
+    <header class="bar bar-nav" style="background-color: blue">
+        <a class="icon icon-me pull-left" id="user" style="color: white"></a>
+        <h1 class="title" style="color: white; font-weight: 600">旅客行程智能推荐系统</h1>
+    </header>
+    <nav class="bar bar-tab">
+        <a class="tab-item active" href="#"> <span class="icon icon-home"></span>
+            <span class="tab-label">首页</span>
+        </a> <a class="tab-item external" href="/linkToRoute"> <span
+            class="icon icon-search"></span><span class="tab-label">路线</span>
+    </a>
+    </nav>
 
-		<div class="content">
-			<div class="list-block">
-				<ul>
-					<li>
-						<div class="item-content">
-							<div class="item-inner">
-								<div class="item-title label">所在起点：</div>
-								<div class="item-input">
-									<input type="text" id="origin" value="当前位置"
-										placeholder="当前位置/北京XX地铁站点">
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="item-content">
-							<div class="item-inner">
-								<div class="item-title label">所达终点：</div>
-								<div class="item-input">
-									<input type="email" id="terminal" placeholder="昆明XX地铁站点">
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="item-content">
-							<div class="item-inner">
-								<div class="item-title label">出行方式：</div>
-								<div class="item-input">
-									<select id="depart-way">
-										<option>商务旅客</option>
-										<option>个人出行</option>
-										<option>家庭出游</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="item-content">
-							<div class="item-inner">
-								<div class="item-title label">出行时间：</div>
-								<div class="item-input">
-									<input type="text" id='datetime-picker' placeholder="出发时间" />
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-			<div class="content-block">
-				<div class="row">
-					<div class="col-100">
-						<a href="#" id="search"
-							class="button button-big button-fill button-danger">搜索</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="content">
+        <div class="list-block">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">所在起点：</div>
+                            <div class="item-input">
+                                <input type="text" id="origin" class="bjLocation" value="当前位置"
+                                       placeholder="当前位置/北京XX地铁站点">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">所达终点：</div>
+                            <div class="item-input">
+                                <input type="email" id="terminal" class="kmLocation"
+                                       placeholder="昆明XX地铁站点">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">出行方式：</div>
+                            <div class="item-input">
+                                <select id="depart-way">
+                                    <option>商务旅客</option>
+                                    <option>个人出行</option>
+                                    <option>家庭出游</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">出行时间：</div>
+                            <div class="item-input">
+                                <input type="text" id='datetime-picker' placeholder="出发时间"/>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block">
+            <div class="row">
+                <div class="col-100">
+                    <a href="#" id="search"
+                       class="button button-big button-fill button-danger">搜索</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-	<div class="panel-overlay"></div>
-	<!-- Left Panel with Reveal effect -->
-	<div class="panel panel-left panel-reveal theme-dark"
-		id='panel-left-demo'>
-		<div
-			style="width: 240px; height: 90px; padding-left: 10px; padding-top: 10px; background-color: #606060;">
-			<div
-				style="width: 74px; height: 74px; float: left; border-radius: 50%; border: 3px solid #eee; overflow: hidden;">
-				<img id="profileImg" width="80" height="80" />
-			</div>
-			<div
-				style="float: left; width: 40%; height: 50%; margin-top: 20px; margin-left: 10px">
+<div class="panel-overlay"></div>
+<!-- Left Panel with Reveal effect -->
+<div class="panel panel-left panel-reveal theme-dark"
+     id='panel-left-demo'>
+    <div
+            style="width: 240px; height: 90px; padding-left: 10px; padding-top: 10px; background-color: #606060;">
+        <div
+                style="width: 74px; height: 74px; float: left; border-radius: 50%; border: 3px solid #eee; overflow: hidden;">
+            <img id="profileImg" width="80" height="80"/>
+        </div>
+        <div
+                style="float: left; width: 40%; height: 50%; margin-top: 20px; margin-left: 10px">
 				<span style="color: white; font-weight: 600; font-size: 20px"
-					id="nickName"></span>
-			</div>
-		</div>
+                      id="nickName"></span>
+        </div>
+    </div>
 
-		<div class="state-title">请选择您的出行状态:</div>
-		<div class="content-block">
-			<div class="list-block">
-				<ul>
-					<li class="item-content">
-						<div class="item-inner" style="color: red">
-							<div class="item-title">经济:</div>
-							<div class="item-after">
-								<div class="adjustFocus">
-									<div class="progress_back_div">
-										<span class="reduce_img reduce_img_ec">-</span>
-										<div class="progress progress_ec">
-											<div class="progress_bg progress_bg_ec">
-												<div class="progress_bar progress_bar_ec"></div>
-											</div>
-											<div class="progress_btn progress_btn_ec"></div>
-											<div class="text text_ec" style="color: white;">0%</div>
-										</div>
-										<span class="add_img add_img_ec">+</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="item-content">
-						<div class="item-inner" style="color: red">
-							<div class="item-title label" style="width: 40%">公司报销</div>
-							<div class="item-input">
-								<label class="label-switch"> <input type="checkbox">
-									<div style="margin-left: 100%" class="checkbox" id="ec1"></div>
-								</label>
-							</div>
-						</div>
-					</li>
-					<li class="item-content">
-						<div class="item-inner" style="color: red">
-							<div class="item-title label" style="width: 40%">能省则省</div>
-							<div class="item-input">
-								<label class="label-switch"> <input type="checkbox">
-									<div style="margin-left: 100%" class="checkbox" id="ec2"></div>
-								</label>
-							</div>
-						</div>
-					</li>
+    <div class="state-title">请选择您的出行状态:</div>
+    <div class="content-block">
+        <div class="list-block">
+            <ul>
+                <li class="item-content">
+                    <div class="item-inner" style="color: red">
+                        <div class="item-title">经济:</div>
+                        <div class="item-after">
+                            <div class="adjustFocus">
+                                <div class="progress_back_div">
+                                    <span class="reduce_img reduce_img_ec">-</span>
+                                    <div class="progress progress_ec">
+                                        <div class="progress_bg progress_bg_ec">
+                                            <div class="progress_bar progress_bar_ec"></div>
+                                        </div>
+                                        <div class="progress_btn progress_btn_ec"></div>
+                                        <div class="text text_ec" style="color: white;">0%</div>
+                                    </div>
+                                    <span class="add_img add_img_ec">+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner" style="color: red">
+                        <div class="item-title label" style="width: 40%">公司报销</div>
+                        <div class="item-input">
+                            <label class="label-switch"> <input type="checkbox">
+                                <div style="margin-left: 100%" class="checkbox" id="ec1"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner" style="color: red">
+                        <div class="item-title label" style="width: 40%">能省则省</div>
+                        <div class="item-input">
+                            <label class="label-switch"> <input type="checkbox">
+                                <div style="margin-left: 100%" class="checkbox" id="ec2"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
 
-					<li class="item-content">
-						<div class="item-inner" style="color: red">
-							<div class="item-title">时间:</div>
-							<div class="item-after">
-								<div class="adjustFocus">
-									<div class="progress_back_div">
-										<span class="reduce_img reduce_img_tt">-</span>
-										<div class="progress progress_tt">
-											<div class="progress_bg progress_bg_tt">
-												<div class="progress_bar progress_bar_tt"></div>
-											</div>
-											<div class="progress_btn progress_btn_tt"></div>
-											<div class="text text_tt" style="color: white;">0%</div>
-										</div>
-										<span class="add_img add_img_tt">+</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="item-content">
-						<div class="item-inner" style="color: red">
-							<div class="item-title label" style="width: 40%">悠闲旅行</div>
-							<div class="item-input">
-								<label class="label-switch"> <input type="checkbox">
-									<div style="margin-left: 100%" class="checkbox" id="time1"></div>
-								</label>
-							</div>
-						</div>
-					</li>
-					<li class="item-content">
-						<div class="item-inner" style="color: red">
-							<div class="item-title label" style="width: 40%">十万火急</div>
-							<div class="item-input">
-								<label class="label-switch"> <input type="checkbox">
-									<div style="margin-left: 100%" class="checkbox" id="time2"></div>
-								</label>
-							</div>
-						</div>
-					</li>
-
-
-					<li class="item-content">
-						<div class="item-inner" style="color: red">
-							<div class="item-title">负重:</div>
-							<div class="item-after">
-								<div class="adjustFocus">
-									<div class="progress_back_div">
-										<span class="reduce_img reduce_img_ss">-</span>
-										<div class="progress progress_ss">
-											<div class="progress_bg progress_bg_ss">
-												<div class="progress_bar progress_bar_ss"></div>
-											</div>
-											<div class="progress_btn progress_btn_ss"></div>
-											<div class="text text_ss" style="color: white;">0%</div>
-										</div>
-										<span class="add_img add_img_ss">+</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="item-content">
-						<div class="item-inner" style="color: red">
-							<div class="item-title label" style="width: 40%">行李居多</div>
-							<div class="item-input">
-								<label class="label-switch"> <input type="checkbox">
-									<div style="margin-left: 100%" class="checkbox"
-										id="load-bearing1"></div>
-								</label>
-							</div>
-						</div>
-					</li>
-					<li class="item-content">
-						<div class="item-inner" style="color: red">
-							<div class="item-title label" style="width: 40%">携带老幼</div>
-							<div class="item-input">
-								<label class="label-switch"> <input type="checkbox">
-									<div style="margin-left: 100%" class="checkbox"
-										id="load-bearing2"></div>
-								</label>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+                <li class="item-content">
+                    <div class="item-inner" style="color: red">
+                        <div class="item-title">时间:</div>
+                        <div class="item-after">
+                            <div class="adjustFocus">
+                                <div class="progress_back_div">
+                                    <span class="reduce_img reduce_img_tt">-</span>
+                                    <div class="progress progress_tt">
+                                        <div class="progress_bg progress_bg_tt">
+                                            <div class="progress_bar progress_bar_tt"></div>
+                                        </div>
+                                        <div class="progress_btn progress_btn_tt"></div>
+                                        <div class="text text_tt" style="color: white;">0%</div>
+                                    </div>
+                                    <span class="add_img add_img_tt">+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner" style="color: red">
+                        <div class="item-title label" style="width: 40%">悠闲旅行</div>
+                        <div class="item-input">
+                            <label class="label-switch"> <input type="checkbox">
+                                <div style="margin-left: 100%" class="checkbox" id="time1"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner" style="color: red">
+                        <div class="item-title label" style="width: 40%">十万火急</div>
+                        <div class="item-input">
+                            <label class="label-switch"> <input type="checkbox">
+                                <div style="margin-left: 100%" class="checkbox" id="time2"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
 
 
+                <li class="item-content">
+                    <div class="item-inner" style="color: red">
+                        <div class="item-title">负重:</div>
+                        <div class="item-after">
+                            <div class="adjustFocus">
+                                <div class="progress_back_div">
+                                    <span class="reduce_img reduce_img_ss">-</span>
+                                    <div class="progress progress_ss">
+                                        <div class="progress_bg progress_bg_ss">
+                                            <div class="progress_bar progress_bar_ss"></div>
+                                        </div>
+                                        <div class="progress_btn progress_btn_ss"></div>
+                                        <div class="text text_ss" style="color: white;">0%</div>
+                                    </div>
+                                    <span class="add_img add_img_ss">+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner" style="color: red">
+                        <div class="item-title label" style="width: 40%">行李居多</div>
+                        <div class="item-input">
+                            <label class="label-switch"> <input type="checkbox">
+                                <div style="margin-left: 100%" class="checkbox"
+                                     id="load-bearing1"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner" style="color: red">
+                        <div class="item-title label" style="width: 40%">携带老幼</div>
+                        <div class="item-input">
+                            <label class="label-switch"> <input type="checkbox">
+                                <div style="margin-left: 100%" class="checkbox"
+                                     id="load-bearing2"></div>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
-	<script type='text/javascript'
-		src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-	<script type='text/javascript'
-		src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
-	<script type='text/javascript'
-		src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
-	<script src="/js/getLatAndLng.js"></script>
-	<script src="/js/index.js"></script>
-	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-	<script>$.noConflict();</script>
-	<script type="text/javascript" src="/js/slide.js"></script>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+<script type='text/javascript'
+        src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript'
+        src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript'
+        src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+<script src="/js/getLatAndLng.js"></script>
+<script src="/js/index.js"></script>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>$.noConflict();</script>
+<script type="text/javascript" src="/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="/js/locationSupport.js"></script>
+<script type="text/javascript" src="/js/slide.js"></script>
 </body>
 </html>
 

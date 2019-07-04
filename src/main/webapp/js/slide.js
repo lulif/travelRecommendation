@@ -377,5 +377,4 @@ jQuery(function() {
 		}, progress_width);
 		jQuery('.text_ss').html(parseInt((left / progress_width) * 100) + '%');
 	});
-
 });

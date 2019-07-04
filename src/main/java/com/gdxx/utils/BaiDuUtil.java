@@ -1,7 +1,7 @@
 package com.gdxx.utils;
 
-import com.gdxx.beans.BaiduLine;
-import com.gdxx.beans.BusBaiDuLine;
+import com.gdxx.base.BaiduLine;
+import com.gdxx.base.BusBaiDuLine;
 import com.google.gson.Gson;
 
 /*

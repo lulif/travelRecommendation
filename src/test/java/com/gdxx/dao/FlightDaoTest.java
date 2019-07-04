@@ -2,6 +2,7 @@ package com.gdxx.dao;
 
 import java.util.List;
 
+import com.gdxx.service.RouteSelectionStrategyService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,15 @@ import com.gdxx.entity.Flight;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class FlightDaoTest {
-	@Autowired
-	private FlightDao flightDao;
+    @Autowired
+    private RouteSelectionStrategyService routeSelectionStrategyService;
 
-	@Test
-	public void test() {
-		
-	}
+    @Test
+    public void test() {
+        routeSelectionStrategyService.updateFlightScore("bj");
+        routeSelectionStrategyService.updateFlightScore("sjz");
+        routeSelectionStrategyService.updateRailScore("bj");
+        System.out.println("OK");
+    }
 
 }

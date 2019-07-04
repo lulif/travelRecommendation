@@ -89,7 +89,6 @@ public class CalculateUtil {
 	/*
 	 * 时间转换
 	 */
-
 	public static int HHmm2seconds(String str) {
 		if (str.contains("天")) {
 			String[] s = str.split("\\+");
@@ -132,6 +131,10 @@ public class CalculateUtil {
 		}
 		return Math.max(HHmm2seconds(timeOri), HHmm2seconds(timeTer))
 				- Math.min(HHmm2seconds(timeOri), HHmm2seconds(timeTer));
+	}
+
+	public static int convertScore(String score) {
+		return Integer.valueOf(score.substring(0, score.length() - 1));
 	}
 
 }

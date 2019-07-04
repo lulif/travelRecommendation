@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gdxx.beans.WechatUser;
+import com.gdxx.base.WechatUser;
 import com.gdxx.dto.UserAccessToken;
 import com.gdxx.entity.User;
 

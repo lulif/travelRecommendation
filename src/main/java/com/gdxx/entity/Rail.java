@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class Rail {
+public class Rail implements Comparable{
 	private Long railId;
 	private String railCode;
 	private Sites departurePlace;
@@ -16,4 +16,16 @@ public class Rail {
 	private Double firstSeatPrice;
 	private Double secondSeatPrice;
 	private Double businessSeatPrice;
+	private Double economicScore;
+	private Double timeScore;
+	private Double loadBearingScore;
+	private Integer esGradeNumber;
+	private Integer tsGradeNumber;
+	private Integer lbsGradeNumber;
+	private Double differenceDegree;
+
+	@Override
+	public int compareTo(Object o) {
+		return 1;
+	}
 }

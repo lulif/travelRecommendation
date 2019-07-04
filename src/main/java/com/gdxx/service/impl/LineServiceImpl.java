@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gdxx.beans.BaiduLine;
+import com.gdxx.base.BaiduLine;
 import com.gdxx.dao.SubwayLinesDao;
 import com.gdxx.dao.SubwayScheduleDao;
 import com.gdxx.dao.SubwayTransferDao;

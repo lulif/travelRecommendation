@@ -7,7 +7,7 @@
 	<property name="log.level" value="debug" />
 	<property name="log.maxHistory" value="30" />
 	<property name="log.filePath"
-		value="${catalina.base}/logs/webapps" />
+		value="${catalina.base}/logs" />
 	<!-- 时间 线程 级别 package.class 信息 -->
 	<property name="log.pattern"
 		value="%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread]%-5level %logger{50}-%msg%n" />
@@ -97,14 +97,14 @@
 		</filter>
 	</appender>
 	<!-- additivity="true" :打印到控制台不仅有info 也有debug 以${log.level}为准 -->
-	<logger name="com.gdxx.schoolSell" level="${log.level}"
+	<logger name="com.gdxx" level="${log.level}"
 		additivity="true">
 		<appender-ref ref="debugAppender" />
 		<appender-ref ref="infoAppender" />
 		<appender-ref ref="errorAppender" />
 	</logger>
 
-	<root level="debug">
+	<root level="info">
 		<appender-ref ref="consoleAppender" />
 	</root>
 </configuration>

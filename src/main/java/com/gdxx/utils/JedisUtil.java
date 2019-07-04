@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.gdxx.beans.JedisPoolWriper;
+import com.gdxx.base.JedisPoolWriper;
 
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
 import redis.clients.jedis.Jedis;
@@ -12,22 +12,22 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.SortingParams;
 import redis.clients.util.SafeEncoder;
 /*
- * jeids²Ù×÷
+ * jeidsæ“ä½œ
  */
 public class JedisUtil {
 	/**
-	 * »º´æÉú´æÊ±¼ä
+	 * ç¼“å­˜ç”Ÿå­˜æ—¶é—´
 	 */
 	private final int expire = 60000;
-	/** ²Ù×÷KeyµÄ·½·¨ */
+	/** æ“ä½œKeyçš„æ–¹æ³• */
 	public Keys KEYS;
-	/** ¶Ô´æ´¢½á¹¹ÎªStringÀàĞÍµÄ²Ù×÷ */
+	/** å¯¹å­˜å‚¨ç»“æ„ä¸ºStringç±»å‹çš„æ“ä½œ */
 	public Strings STRINGS;
-	/** ¶Ô´æ´¢½á¹¹ÎªListÀàĞÍµÄ²Ù×÷ */
+	/** å¯¹å­˜å‚¨ç»“æ„ä¸ºListç±»å‹çš„æ“ä½œ */
 	public Lists LISTS;
-	/** ¶Ô´æ´¢½á¹¹ÎªSetÀàĞÍµÄ²Ù×÷ */
+	/** å¯¹å­˜å‚¨ç»“æ„ä¸ºSetç±»å‹çš„æ“ä½œ */
 	public Sets SETS;
-	/** ¶Ô´æ´¢½á¹¹ÎªHashMapÀàĞÍµÄ²Ù×÷ */
+	/** å¯¹å­˜å‚¨ç»“æ„ä¸ºHashMapç±»å‹çš„æ“ä½œ */
 	public Hash HASH;
 
 	private JedisPool jedisPool;
@@ -41,7 +41,7 @@ public class JedisUtil {
 	}
 
 	/**
-	 * ´ÓjedisÁ¬½Ó³ØÖĞ»ñÈ¡»ñÈ¡jedis¶ÔÏó
+	 * ä»jedisè¿æ¥æ± ä¸­è·å–è·å–jediså¯¹è±¡
 	 * 
 	 */
 	public Jedis getJedis() {
@@ -49,7 +49,7 @@ public class JedisUtil {
 	}
 
 	/**
-	 * ÉèÖÃ¹ıÆÚÊ±¼ä
+	 * è®¾ç½®è¿‡æœŸæ—¶é—´
 	 */
 	public void expire(String key, int seconds) {
 		if (seconds <= 0) {
@@ -61,7 +61,7 @@ public class JedisUtil {
 	}
 
 	/**
-	 * ÉèÖÃÄ¬ÈÏ¹ıÆÚÊ±¼ä
+	 * è®¾ç½®é»˜è®¤è¿‡æœŸæ—¶é—´
 	 */
 	public void expire(String key) {
 		expire(key, expire);
@@ -71,7 +71,7 @@ public class JedisUtil {
 	public class Keys {
 
 		/**
-		 * Çå¿ÕËùÓĞkey
+		 * æ¸…ç©ºæ‰€æœ‰key
 		 */
 		public String flushAll() {
 			Jedis jedis = getJedis();
@@ -81,13 +81,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ¸ü¸Äkey
+		 * æ›´æ”¹key
 		 * 
 		 * @param String
 		 *            oldkey
 		 * @param String
 		 *            newkey
-		 * @return ×´Ì¬Âë
+		 * @return çŠ¶æ€ç 
 		 * */
 		public String rename(String oldkey, String newkey) {
 			return rename(SafeEncoder.encode(oldkey),
@@ -95,13 +95,13 @@ public class JedisUtil {
 		}
 		
 		/**
-		 * ¸ü¸Äkey
+		 * æ›´æ”¹key
 		 * 
 		 * @param String
 		 *            oldkey
 		 * @param String
 		 *            newkey
-		 * @return ×´Ì¬Âë
+		 * @return çŠ¶æ€ç 
 		 * */
 		public String rename(byte[] oldkey, byte[] newkey) {
 			Jedis jedis = getJedis();
@@ -111,13 +111,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ¸ü¸Äkey,½öµ±ĞÂkey²»´æÔÚÊ±²ÅÖ´ĞĞ
+		 * æ›´æ”¹key,ä»…å½“æ–°keyä¸å­˜åœ¨æ—¶æ‰æ‰§è¡Œ
 		 * 
 		 * @param String
 		 *            oldkey
 		 * @param String
 		 *            newkey
-		 * @return ×´Ì¬Âë
+		 * @return çŠ¶æ€ç 
 		 * */
 		public long renamenx(String oldkey, String newkey) {
 			Jedis jedis = getJedis();
@@ -129,13 +129,13 @@ public class JedisUtil {
 
 
 		/**
-		 * ÉèÖÃkeyµÄ¹ıÆÚÊ±¼ä£¬ÒÔÃëÎªµ¥Î»
+		 * è®¾ç½®keyçš„è¿‡æœŸæ—¶é—´ï¼Œä»¥ç§’ä¸ºå•ä½
 		 * 
 		 * @param String
 		 *            key
-		 * @param Ê±¼ä
-		 *            ,ÒÑÃëÎªµ¥Î»
-		 * @return Ó°ÏìµÄ¼ÇÂ¼Êı
+		 * @param æ—¶é—´
+		 *            ,å·²ç§’ä¸ºå•ä½
+		 * @return å½±å“çš„è®°å½•æ•°
 		 * */
 		public long expired(String key, int seconds) {
 			Jedis jedis = getJedis();
@@ -145,13 +145,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÉèÖÃkeyµÄ¹ıÆÚÊ±¼ä,ËüÊÇ¾àÀúÔª£¨¼´¸ñÁÖÍşÖÎ±ê×¼Ê±¼ä 1970 Äê 1 ÔÂ 1 ÈÕµÄ 00:00:00£¬¸ñÀï¸ßÀûÀú£©µÄÆ«ÒÆÁ¿¡£
+		 * è®¾ç½®keyçš„è¿‡æœŸæ—¶é—´,å®ƒæ˜¯è·å†å…ƒï¼ˆå³æ ¼æ—å¨æ²»æ ‡å‡†æ—¶é—´ 1970 å¹´ 1 æœˆ 1 æ—¥çš„ 00:00:00ï¼Œæ ¼é‡Œé«˜åˆ©å†ï¼‰çš„åç§»é‡ã€‚
 		 * 
 		 * @param String
 		 *            key
-		 * @param Ê±¼ä
-		 *            ,ÒÑÃëÎªµ¥Î»
-		 * @return Ó°ÏìµÄ¼ÇÂ¼Êı
+		 * @param æ—¶é—´
+		 *            ,å·²ç§’ä¸ºå•ä½
+		 * @return å½±å“çš„è®°å½•æ•°
 		 * */
 		public long expireAt(String key, long timestamp) {
 			Jedis jedis = getJedis();
@@ -161,11 +161,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ²éÑ¯keyµÄ¹ıÆÚÊ±¼ä
+		 * æŸ¥è¯¢keyçš„è¿‡æœŸæ—¶é—´
 		 * 
 		 * @param String
 		 *            key
-		 * @return ÒÔÃëÎªµ¥Î»µÄÊ±¼ä±íÊ¾
+		 * @return ä»¥ç§’ä¸ºå•ä½çš„æ—¶é—´è¡¨ç¤º
 		 * */
 		public long ttl(String key) {
 			Jedis sjedis = getJedis();
@@ -175,10 +175,10 @@ public class JedisUtil {
 		}
 
 		/**
-		 * È¡Ïû¶Ôkey¹ıÆÚÊ±¼äµÄÉèÖÃ
+		 * å–æ¶ˆå¯¹keyè¿‡æœŸæ—¶é—´çš„è®¾ç½®
 		 * 
 		 * @param key
-		 * @return Ó°ÏìµÄ¼ÇÂ¼Êı
+		 * @return å½±å“çš„è®°å½•æ•°
 		 * */
 		public long persist(String key) {
 			Jedis jedis = getJedis();
@@ -188,11 +188,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * É¾³ıkeys¶ÔÓ¦µÄ¼ÇÂ¼,¿ÉÒÔÊÇ¶à¸ökey
+		 * åˆ é™¤keyså¯¹åº”çš„è®°å½•,å¯ä»¥æ˜¯å¤šä¸ªkey
 		 * 
 		 * @param String
 		 *            ... keys
-		 * @return É¾³ıµÄ¼ÇÂ¼Êı
+		 * @return åˆ é™¤çš„è®°å½•æ•°
 		 * */
 		public long del(String... keys) {
 			Jedis jedis = getJedis();
@@ -202,11 +202,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * É¾³ıkeys¶ÔÓ¦µÄ¼ÇÂ¼,¿ÉÒÔÊÇ¶à¸ökey
+		 * åˆ é™¤keyså¯¹åº”çš„è®°å½•,å¯ä»¥æ˜¯å¤šä¸ªkey
 		 * 
 		 * @param String
 		 *            ... keys
-		 * @return É¾³ıµÄ¼ÇÂ¼Êı
+		 * @return åˆ é™¤çš„è®°å½•æ•°
 		 * */
 		public long del(byte[]... keys) {
 			Jedis jedis = getJedis();
@@ -216,7 +216,7 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÅĞ¶ÏkeyÊÇ·ñ´æÔÚ
+		 * åˆ¤æ–­keyæ˜¯å¦å­˜åœ¨
 		 * 
 		 * @param String
 		 *            key
@@ -231,11 +231,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ¶ÔList,Set,SortSet½øĞĞÅÅĞò,Èç¹û¼¯ºÏÊı¾İ½Ï´óÓ¦±ÜÃâÊ¹ÓÃÕâ¸ö·½·¨
+		 * å¯¹List,Set,SortSetè¿›è¡Œæ’åº,å¦‚æœé›†åˆæ•°æ®è¾ƒå¤§åº”é¿å…ä½¿ç”¨è¿™ä¸ªæ–¹æ³•
 		 * 
 		 * @param String
 		 *            key
-		 * @return List<String> ¼¯ºÏµÄÈ«²¿¼ÇÂ¼
+		 * @return List<String> é›†åˆçš„å…¨éƒ¨è®°å½•
 		 * **/
 		public List<String> sort(String key) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -246,13 +246,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ¶ÔList,Set,SortSet½øĞĞÅÅĞò»òlimit
+		 * å¯¹List,Set,SortSetè¿›è¡Œæ’åºæˆ–limit
 		 * 
 		 * @param String
 		 *            key
 		 * @param SortingParams
-		 *            parame ¶¨ÒåÅÅĞòÀàĞÍ»òlimitµÄÆğÖ¹Î»ÖÃ.
-		 * @return List<String> È«²¿»ò²¿·Ö¼ÇÂ¼
+		 *            parame å®šä¹‰æ’åºç±»å‹æˆ–limitçš„èµ·æ­¢ä½ç½®.
+		 * @return List<String> å…¨éƒ¨æˆ–éƒ¨åˆ†è®°å½•
 		 * **/
 		public List<String> sort(String key, SortingParams parame) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -263,7 +263,7 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ·µ»ØÖ¸¶¨key´æ´¢µÄÀàĞÍ
+		 * è¿”å›æŒ‡å®škeyå­˜å‚¨çš„ç±»å‹
 		 * 
 		 * @param String
 		 *            key
@@ -278,10 +278,10 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ²éÕÒËùÓĞÆ¥Åä¸ø¶¨µÄÄ£Ê½µÄ¼ü
+		 * æŸ¥æ‰¾æ‰€æœ‰åŒ¹é…ç»™å®šçš„æ¨¡å¼çš„é”®
 		 * 
 		 * @param String
-		 *            keyµÄ±í´ïÊ½,*±íÊ¾¶à¸ö£¬£¿±íÊ¾Ò»¸ö
+		 *            keyçš„è¡¨è¾¾å¼,*è¡¨ç¤ºå¤šä¸ªï¼Œï¼Ÿè¡¨ç¤ºä¸€ä¸ª
 		 * */
 		public Set<String> keys(String pattern) {
 			Jedis jedis = getJedis();
@@ -295,13 +295,13 @@ public class JedisUtil {
 	public class Sets {
 
 		/**
-		 * ÏòSetÌí¼ÓÒ»Ìõ¼ÇÂ¼£¬Èç¹ûmemberÒÑ´æÔÚ·µ»Ø0,·ñÔò·µ»Ø1
+		 * å‘Setæ·»åŠ ä¸€æ¡è®°å½•ï¼Œå¦‚æœmemberå·²å­˜åœ¨è¿”å›0,å¦åˆ™è¿”å›1
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
 		 *            member
-		 * @return ²Ù×÷Âë,0»ò1
+		 * @return æ“ä½œç ,0æˆ–1
 		 * */
 		public long sadd(String key, String member) {
 			Jedis jedis = getJedis();
@@ -318,11 +318,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * »ñÈ¡¸ø¶¨keyÖĞÔªËØ¸öÊı
+		 * è·å–ç»™å®škeyä¸­å…ƒç´ ä¸ªæ•°
 		 * 
 		 * @param String
 		 *            key
-		 * @return ÔªËØ¸öÊı
+		 * @return å…ƒç´ ä¸ªæ•°
 		 * */
 		public long scard(String key) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -333,11 +333,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ·µ»Ø´ÓµÚÒ»×éºÍËùÓĞµÄ¸ø¶¨¼¯ºÏÖ®¼äµÄ²îÒìµÄ³ÉÔ±
+		 * è¿”å›ä»ç¬¬ä¸€ç»„å’Œæ‰€æœ‰çš„ç»™å®šé›†åˆä¹‹é—´çš„å·®å¼‚çš„æˆå‘˜
 		 * 
 		 * @param String
 		 *            ... keys
-		 * @return ²îÒìµÄ³ÉÔ±¼¯ºÏ
+		 * @return å·®å¼‚çš„æˆå‘˜é›†åˆ
 		 * */
 		public Set<String> sdiff(String... keys) {
 			Jedis jedis = getJedis();
@@ -347,13 +347,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * Õâ¸öÃüÁîµÈÓÚsdiff,µ«·µ»ØµÄ²»ÊÇ½á¹û¼¯,¶øÊÇ½«½á¹û¼¯´æ´¢ÔÚĞÂµÄ¼¯ºÏÖĞ£¬Èç¹ûÄ¿±êÒÑ´æÔÚ£¬Ôò¸²¸Ç¡£
+		 * è¿™ä¸ªå‘½ä»¤ç­‰äºsdiff,ä½†è¿”å›çš„ä¸æ˜¯ç»“æœé›†,è€Œæ˜¯å°†ç»“æœé›†å­˜å‚¨åœ¨æ–°çš„é›†åˆä¸­ï¼Œå¦‚æœç›®æ ‡å·²å­˜åœ¨ï¼Œåˆ™è¦†ç›–ã€‚
 		 * 
 		 * @param String
-		 *            newkey ĞÂ½á¹û¼¯µÄkey
+		 *            newkey æ–°ç»“æœé›†çš„key
 		 * @param String
-		 *            ... keys ±È½ÏµÄ¼¯ºÏ
-		 * @return ĞÂ¼¯ºÏÖĞµÄ¼ÇÂ¼Êı
+		 *            ... keys æ¯”è¾ƒçš„é›†åˆ
+		 * @return æ–°é›†åˆä¸­çš„è®°å½•æ•°
 		 * **/
 		public long sdiffstore(String newkey, String... keys) {
 			Jedis jedis = getJedis();
@@ -363,11 +363,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ·µ»Ø¸ø¶¨¼¯ºÏ½»¼¯µÄ³ÉÔ±,Èç¹ûÆäÖĞÒ»¸ö¼¯ºÏÎª²»´æÔÚ»òÎª¿Õ£¬Ôò·µ»Ø¿ÕSet
+		 * è¿”å›ç»™å®šé›†åˆäº¤é›†çš„æˆå‘˜,å¦‚æœå…¶ä¸­ä¸€ä¸ªé›†åˆä¸ºä¸å­˜åœ¨æˆ–ä¸ºç©ºï¼Œåˆ™è¿”å›ç©ºSet
 		 * 
 		 * @param String
 		 *            ... keys
-		 * @return ½»¼¯³ÉÔ±µÄ¼¯ºÏ
+		 * @return äº¤é›†æˆå‘˜çš„é›†åˆ
 		 * **/
 		public Set<String> sinter(String... keys) {
 			Jedis jedis = getJedis();
@@ -377,13 +377,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * Õâ¸öÃüÁîµÈÓÚsinter,µ«·µ»ØµÄ²»ÊÇ½á¹û¼¯,¶øÊÇ½«½á¹û¼¯´æ´¢ÔÚĞÂµÄ¼¯ºÏÖĞ£¬Èç¹ûÄ¿±êÒÑ´æÔÚ£¬Ôò¸²¸Ç¡£
+		 * è¿™ä¸ªå‘½ä»¤ç­‰äºsinter,ä½†è¿”å›çš„ä¸æ˜¯ç»“æœé›†,è€Œæ˜¯å°†ç»“æœé›†å­˜å‚¨åœ¨æ–°çš„é›†åˆä¸­ï¼Œå¦‚æœç›®æ ‡å·²å­˜åœ¨ï¼Œåˆ™è¦†ç›–ã€‚
 		 * 
 		 * @param String
-		 *            newkey ĞÂ½á¹û¼¯µÄkey
+		 *            newkey æ–°ç»“æœé›†çš„key
 		 * @param String
-		 *            ... keys ±È½ÏµÄ¼¯ºÏ
-		 * @return ĞÂ¼¯ºÏÖĞµÄ¼ÇÂ¼Êı
+		 *            ... keys æ¯”è¾ƒçš„é›†åˆ
+		 * @return æ–°é›†åˆä¸­çš„è®°å½•æ•°
 		 * **/
 		public long sinterstore(String newkey, String... keys) {
 			Jedis jedis = getJedis();
@@ -393,13 +393,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * È·¶¨Ò»¸ö¸ø¶¨µÄÖµÊÇ·ñ´æÔÚ
+		 * ç¡®å®šä¸€ä¸ªç»™å®šçš„å€¼æ˜¯å¦å­˜åœ¨
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
-		 *            member ÒªÅĞ¶ÏµÄÖµ
-		 * @return ´æÔÚ·µ»Ø1£¬²»´æÔÚ·µ»Ø0
+		 *            member è¦åˆ¤æ–­çš„å€¼
+		 * @return å­˜åœ¨è¿”å›1ï¼Œä¸å­˜åœ¨è¿”å›0
 		 * **/
 		public boolean sismember(String key, String member) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -410,11 +410,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ·µ»Ø¼¯ºÏÖĞµÄËùÓĞ³ÉÔ±
+		 * è¿”å›é›†åˆä¸­çš„æ‰€æœ‰æˆå‘˜
 		 * 
 		 * @param String
 		 *            key
-		 * @return ³ÉÔ±¼¯ºÏ
+		 * @return æˆå‘˜é›†åˆ
 		 * */
 		public Set<String> smembers(String key) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -433,17 +433,17 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ½«³ÉÔ±´ÓÔ´¼¯ºÏÒÆ³ö·ÅÈëÄ¿±ê¼¯ºÏ <br/>
-		 * Èç¹ûÔ´¼¯ºÏ²»´æÔÚ»ò²»°ü¹şÖ¸¶¨³ÉÔ±£¬²»½øĞĞÈÎºÎ²Ù×÷£¬·µ»Ø0<br/>
-		 * ·ñÔò¸Ã³ÉÔ±´ÓÔ´¼¯ºÏÉÏÉ¾³ı£¬²¢Ìí¼Óµ½Ä¿±ê¼¯ºÏ£¬Èç¹ûÄ¿±ê¼¯ºÏÖĞ³ÉÔ±ÒÑ´æÔÚ£¬ÔòÖ»ÔÚÔ´¼¯ºÏ½øĞĞÉ¾³ı
+		 * å°†æˆå‘˜ä»æºé›†åˆç§»å‡ºæ”¾å…¥ç›®æ ‡é›†åˆ <br/>
+		 * å¦‚æœæºé›†åˆä¸å­˜åœ¨æˆ–ä¸åŒ…å“ˆæŒ‡å®šæˆå‘˜ï¼Œä¸è¿›è¡Œä»»ä½•æ“ä½œï¼Œè¿”å›0<br/>
+		 * å¦åˆ™è¯¥æˆå‘˜ä»æºé›†åˆä¸Šåˆ é™¤ï¼Œå¹¶æ·»åŠ åˆ°ç›®æ ‡é›†åˆï¼Œå¦‚æœç›®æ ‡é›†åˆä¸­æˆå‘˜å·²å­˜åœ¨ï¼Œåˆ™åªåœ¨æºé›†åˆè¿›è¡Œåˆ é™¤
 		 * 
 		 * @param String
-		 *            srckey Ô´¼¯ºÏ
+		 *            srckey æºé›†åˆ
 		 * @param String
-		 *            dstkey Ä¿±ê¼¯ºÏ
+		 *            dstkey ç›®æ ‡é›†åˆ
 		 * @param String
-		 *            member Ô´¼¯ºÏÖĞµÄ³ÉÔ±
-		 * @return ×´Ì¬Âë£¬1³É¹¦£¬0Ê§°Ü
+		 *            member æºé›†åˆä¸­çš„æˆå‘˜
+		 * @return çŠ¶æ€ç ï¼Œ1æˆåŠŸï¼Œ0å¤±è´¥
 		 * */
 		public long smove(String srckey, String dstkey, String member) {
 			Jedis jedis = getJedis();
@@ -453,11 +453,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ´Ó¼¯ºÏÖĞÉ¾³ı³ÉÔ±
+		 * ä»é›†åˆä¸­åˆ é™¤æˆå‘˜
 		 * 
 		 * @param String
 		 *            key
-		 * @return ±»É¾³ıµÄ³ÉÔ±
+		 * @return è¢«åˆ é™¤çš„æˆå‘˜
 		 * */
 		public String spop(String key) {
 			Jedis jedis = getJedis();
@@ -467,13 +467,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ´Ó¼¯ºÏÖĞÉ¾³ıÖ¸¶¨³ÉÔ±
+		 * ä»é›†åˆä¸­åˆ é™¤æŒ‡å®šæˆå‘˜
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
-		 *            member ÒªÉ¾³ıµÄ³ÉÔ±
-		 * @return ×´Ì¬Âë£¬³É¹¦·µ»Ø1£¬³ÉÔ±²»´æÔÚ·µ»Ø0
+		 *            member è¦åˆ é™¤çš„æˆå‘˜
+		 * @return çŠ¶æ€ç ï¼ŒæˆåŠŸè¿”å›1ï¼Œæˆå‘˜ä¸å­˜åœ¨è¿”å›0
 		 * */
 		public long srem(String key, String member) {
 			Jedis jedis = getJedis();
@@ -483,11 +483,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ºÏ²¢¶à¸ö¼¯ºÏ²¢·µ»ØºÏ²¢ºóµÄ½á¹û£¬ºÏ²¢ºóµÄ½á¹û¼¯ºÏ²¢²»±£´æ<br/>
+		 * åˆå¹¶å¤šä¸ªé›†åˆå¹¶è¿”å›åˆå¹¶åçš„ç»“æœï¼Œåˆå¹¶åçš„ç»“æœé›†åˆå¹¶ä¸ä¿å­˜<br/>
 		 * 
 		 * @param String
 		 *            ... keys
-		 * @return ºÏ²¢ºóµÄ½á¹û¼¯ºÏ
+		 * @return åˆå¹¶åçš„ç»“æœé›†åˆ
 		 * @see sunionstore
 		 * */
 		public Set<String> sunion(String... keys) {
@@ -498,12 +498,12 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ºÏ²¢¶à¸ö¼¯ºÏ²¢½«ºÏ²¢ºóµÄ½á¹û¼¯±£´æÔÚÖ¸¶¨µÄĞÂ¼¯ºÏÖĞ£¬Èç¹ûĞÂ¼¯ºÏÒÑ¾­´æÔÚÔò¸²¸Ç
+		 * åˆå¹¶å¤šä¸ªé›†åˆå¹¶å°†åˆå¹¶åçš„ç»“æœé›†ä¿å­˜åœ¨æŒ‡å®šçš„æ–°é›†åˆä¸­ï¼Œå¦‚æœæ–°é›†åˆå·²ç»å­˜åœ¨åˆ™è¦†ç›–
 		 * 
 		 * @param String
-		 *            newkey ĞÂ¼¯ºÏµÄkey
+		 *            newkey æ–°é›†åˆçš„key
 		 * @param String
-		 *            ... keys ÒªºÏ²¢µÄ¼¯ºÏ
+		 *            ... keys è¦åˆå¹¶çš„é›†åˆ
 		 * **/
 		public long sunionstore(String newkey, String... keys) {
 			Jedis jedis = getJedis();
@@ -517,13 +517,13 @@ public class JedisUtil {
 	public class Hash {
 
 		/**
-		 * ´ÓhashÖĞÉ¾³ıÖ¸¶¨µÄ´æ´¢
+		 * ä»hashä¸­åˆ é™¤æŒ‡å®šçš„å­˜å‚¨
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
-		 *            fieid ´æ´¢µÄÃû×Ö
-		 * @return ×´Ì¬Âë£¬1³É¹¦£¬0Ê§°Ü
+		 *            fieid å­˜å‚¨çš„åå­—
+		 * @return çŠ¶æ€ç ï¼Œ1æˆåŠŸï¼Œ0å¤±è´¥
 		 * */
 		public long hdel(String key, String fieid) {
 			Jedis jedis = getJedis();
@@ -540,13 +540,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ²âÊÔhashÖĞÖ¸¶¨µÄ´æ´¢ÊÇ·ñ´æÔÚ
+		 * æµ‹è¯•hashä¸­æŒ‡å®šçš„å­˜å‚¨æ˜¯å¦å­˜åœ¨
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
-		 *            fieid ´æ´¢µÄÃû×Ö
-		 * @return 1´æÔÚ£¬0²»´æÔÚ
+		 *            fieid å­˜å‚¨çš„åå­—
+		 * @return 1å­˜åœ¨ï¼Œ0ä¸å­˜åœ¨
 		 * */
 		public boolean hexists(String key, String fieid) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -557,13 +557,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ·µ»ØhashÖĞÖ¸¶¨´æ´¢Î»ÖÃµÄÖµ
+		 * è¿”å›hashä¸­æŒ‡å®šå­˜å‚¨ä½ç½®çš„å€¼
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
-		 *            fieid ´æ´¢µÄÃû×Ö
-		 * @return ´æ´¢¶ÔÓ¦µÄÖµ
+		 *            fieid å­˜å‚¨çš„åå­—
+		 * @return å­˜å‚¨å¯¹åº”çš„å€¼
 		 * */
 		public String hget(String key, String fieid) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -582,7 +582,7 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÒÔMapµÄĞÎÊ½·µ»ØhashÖĞµÄ´æ´¢ºÍÖµ
+		 * ä»¥Mapçš„å½¢å¼è¿”å›hashä¸­çš„å­˜å‚¨å’Œå€¼
 		 * 
 		 * @param String
 		 *            key
@@ -597,7 +597,7 @@ public class JedisUtil {
 		}
 
 		/**
-		 * Ìí¼ÓÒ»¸ö¶ÔÓ¦¹ØÏµ
+		 * æ·»åŠ ä¸€ä¸ªå¯¹åº”å…³ç³»
 		 * 
 		 * @param String
 		 *            key
@@ -605,7 +605,7 @@ public class JedisUtil {
 		 *            fieid
 		 * @param String
 		 *            value
-		 * @return ×´Ì¬Âë 1³É¹¦£¬0Ê§°Ü£¬fieidÒÑ´æÔÚ½«¸üĞÂ£¬Ò²·µ»Ø0
+		 * @return çŠ¶æ€ç  1æˆåŠŸï¼Œ0å¤±è´¥ï¼Œfieidå·²å­˜åœ¨å°†æ›´æ–°ï¼Œä¹Ÿè¿”å›0
 		 * **/
 		public long hset(String key, String fieid, String value) {
 			Jedis jedis = getJedis();
@@ -622,7 +622,7 @@ public class JedisUtil {
 		}
 
 		/**
-		 * Ìí¼Ó¶ÔÓ¦¹ØÏµ£¬Ö»ÓĞÔÚfieid²»´æÔÚÊ±²ÅÖ´ĞĞ
+		 * æ·»åŠ å¯¹åº”å…³ç³»ï¼Œåªæœ‰åœ¨fieidä¸å­˜åœ¨æ—¶æ‰æ‰§è¡Œ
 		 * 
 		 * @param String
 		 *            key
@@ -630,7 +630,7 @@ public class JedisUtil {
 		 *            fieid
 		 * @param String
 		 *            value
-		 * @return ×´Ì¬Âë 1³É¹¦£¬0Ê§°ÜfieidÒÑ´æ
+		 * @return çŠ¶æ€ç  1æˆåŠŸï¼Œ0å¤±è´¥fieidå·²å­˜
 		 * **/
 		public long hsetnx(String key, String fieid, String value) {
 			Jedis jedis = getJedis();
@@ -640,7 +640,7 @@ public class JedisUtil {
 		}
 
 		/**
-		 * »ñÈ¡hashÖĞvalueµÄ¼¯ºÏ
+		 * è·å–hashä¸­valueçš„é›†åˆ
 		 * 
 		 * @param String
 		 *            key
@@ -655,15 +655,15 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÔÚÖ¸¶¨µÄ´æ´¢Î»ÖÃ¼ÓÉÏÖ¸¶¨µÄÊı×Ö£¬´æ´¢Î»ÖÃµÄÖµ±ØĞë¿É×ªÎªÊı×ÖÀàĞÍ
+		 * åœ¨æŒ‡å®šçš„å­˜å‚¨ä½ç½®åŠ ä¸ŠæŒ‡å®šçš„æ•°å­—ï¼Œå­˜å‚¨ä½ç½®çš„å€¼å¿…é¡»å¯è½¬ä¸ºæ•°å­—ç±»å‹
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
-		 *            fieid ´æ´¢Î»ÖÃ
+		 *            fieid å­˜å‚¨ä½ç½®
 		 * @param String
-		 *            long value ÒªÔö¼ÓµÄÖµ,¿ÉÒÔÊÇ¸ºÊı
-		 * @return Ôö¼ÓÖ¸¶¨Êı×Öºó£¬´æ´¢Î»ÖÃµÄÖµ
+		 *            long value è¦å¢åŠ çš„å€¼,å¯ä»¥æ˜¯è´Ÿæ•°
+		 * @return å¢åŠ æŒ‡å®šæ•°å­—åï¼Œå­˜å‚¨ä½ç½®çš„å€¼
 		 * */
 		public long hincrby(String key, String fieid, long value) {
 			Jedis jedis = getJedis();
@@ -673,11 +673,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ·µ»ØÖ¸¶¨hashÖĞµÄËùÓĞ´æ´¢Ãû×Ö,ÀàËÆMapÖĞµÄkeySet·½·¨
+		 * è¿”å›æŒ‡å®šhashä¸­çš„æ‰€æœ‰å­˜å‚¨åå­—,ç±»ä¼¼Mapä¸­çš„keySetæ–¹æ³•
 		 * 
 		 * @param String
 		 *            key
-		 * @return Set<String> ´æ´¢Ãû³ÆµÄ¼¯ºÏ
+		 * @return Set<String> å­˜å‚¨åç§°çš„é›†åˆ
 		 * */
 		public Set<String> hkeys(String key) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -688,11 +688,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * »ñÈ¡hashÖĞ´æ´¢µÄ¸öÊı£¬ÀàËÆMapÖĞsize·½·¨
+		 * è·å–hashä¸­å­˜å‚¨çš„ä¸ªæ•°ï¼Œç±»ä¼¼Mapä¸­sizeæ–¹æ³•
 		 * 
 		 * @param String
 		 *            key
-		 * @return long ´æ´¢µÄ¸öÊı
+		 * @return long å­˜å‚¨çš„ä¸ªæ•°
 		 * */
 		public long hlen(String key) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -703,12 +703,12 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ¸ù¾İ¶à¸ökey£¬»ñÈ¡¶ÔÓ¦µÄvalue£¬·µ»ØList,Èç¹ûÖ¸¶¨µÄkey²»´æÔÚ,List¶ÔÓ¦Î»ÖÃÎªnull
+		 * æ ¹æ®å¤šä¸ªkeyï¼Œè·å–å¯¹åº”çš„valueï¼Œè¿”å›List,å¦‚æœæŒ‡å®šçš„keyä¸å­˜åœ¨,Listå¯¹åº”ä½ç½®ä¸ºnull
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
-		 *            ... fieids ´æ´¢Î»ÖÃ
+		 *            ... fieids å­˜å‚¨ä½ç½®
 		 * @return List<String>
 		 * */
 		public List<String> hmget(String key, String... fieids) {
@@ -728,13 +728,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * Ìí¼Ó¶ÔÓ¦¹ØÏµ£¬Èç¹û¶ÔÓ¦¹ØÏµÒÑ´æÔÚ£¬Ôò¸²¸Ç
+		 * æ·»åŠ å¯¹åº”å…³ç³»ï¼Œå¦‚æœå¯¹åº”å…³ç³»å·²å­˜åœ¨ï¼Œåˆ™è¦†ç›–
 		 * 
 		 * @param Strin
 		 *            key
 		 * @param Map
-		 *            <String,String> ¶ÔÓ¦¹ØÏµ
-		 * @return ×´Ì¬£¬³É¹¦·µ»ØOK
+		 *            <String,String> å¯¹åº”å…³ç³»
+		 * @return çŠ¶æ€ï¼ŒæˆåŠŸè¿”å›OK
 		 * */
 		public String hmset(String key, Map<String, String> map) {
 			Jedis jedis = getJedis();
@@ -744,13 +744,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * Ìí¼Ó¶ÔÓ¦¹ØÏµ£¬Èç¹û¶ÔÓ¦¹ØÏµÒÑ´æÔÚ£¬Ôò¸²¸Ç
+		 * æ·»åŠ å¯¹åº”å…³ç³»ï¼Œå¦‚æœå¯¹åº”å…³ç³»å·²å­˜åœ¨ï¼Œåˆ™è¦†ç›–
 		 * 
 		 * @param Strin
 		 *            key
 		 * @param Map
-		 *            <String,String> ¶ÔÓ¦¹ØÏµ
-		 * @return ×´Ì¬£¬³É¹¦·µ»ØOK
+		 *            <String,String> å¯¹åº”å…³ç³»
+		 * @return çŠ¶æ€ï¼ŒæˆåŠŸè¿”å›OK
 		 * */
 		public String hmset(byte[] key, Map<byte[], byte[]> map) {
 			Jedis jedis = getJedis();
@@ -764,11 +764,11 @@ public class JedisUtil {
 	// *******************************************Strings*******************************************//
 	public class Strings {
 		/**
-		 * ¸ù¾İkey»ñÈ¡¼ÇÂ¼
+		 * æ ¹æ®keyè·å–è®°å½•
 		 * 
 		 * @param String
 		 *            key
-		 * @return Öµ
+		 * @return å€¼
 		 * */
 		public String get(String key) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -779,10 +779,10 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ¸ù¾İkey»ñÈ¡¼ÇÂ¼
+		 * æ ¹æ®keyè·å–è®°å½•
 		 * 
 		 * @param byte[] key
-		 * @return Öµ
+		 * @return å€¼
 		 * */
 		public byte[] get(byte[] key) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -793,14 +793,14 @@ public class JedisUtil {
 		}
 
 		/**
-		 * Ìí¼ÓÓĞ¹ıÆÚÊ±¼äµÄ¼ÇÂ¼
+		 * æ·»åŠ æœ‰è¿‡æœŸæ—¶é—´çš„è®°å½•
 		 * 
 		 * @param String
 		 *            key
-		 * @param int seconds ¹ıÆÚÊ±¼ä£¬ÒÔÃëÎªµ¥Î»
+		 * @param int seconds è¿‡æœŸæ—¶é—´ï¼Œä»¥ç§’ä¸ºå•ä½
 		 * @param String
 		 *            value
-		 * @return String ²Ù×÷×´Ì¬
+		 * @return String æ“ä½œçŠ¶æ€
 		 * */
 		public String setEx(String key, int seconds, String value) {
 			Jedis jedis = getJedis();
@@ -810,14 +810,14 @@ public class JedisUtil {
 		}
 
 		/**
-		 * Ìí¼ÓÓĞ¹ıÆÚÊ±¼äµÄ¼ÇÂ¼
+		 * æ·»åŠ æœ‰è¿‡æœŸæ—¶é—´çš„è®°å½•
 		 * 
 		 * @param String
 		 *            key
-		 * @param int seconds ¹ıÆÚÊ±¼ä£¬ÒÔÃëÎªµ¥Î»
+		 * @param int seconds è¿‡æœŸæ—¶é—´ï¼Œä»¥ç§’ä¸ºå•ä½
 		 * @param String
 		 *            value
-		 * @return String ²Ù×÷×´Ì¬
+		 * @return String æ“ä½œçŠ¶æ€
 		 * */
 		public String setEx(byte[] key, int seconds, byte[] value) {
 			Jedis jedis = getJedis();
@@ -827,13 +827,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * Ìí¼ÓÒ»Ìõ¼ÇÂ¼£¬½öµ±¸ø¶¨µÄkey²»´æÔÚÊ±²Å²åÈë
+		 * æ·»åŠ ä¸€æ¡è®°å½•ï¼Œä»…å½“ç»™å®šçš„keyä¸å­˜åœ¨æ—¶æ‰æ’å…¥
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
 		 *            value
-		 * @return long ×´Ì¬Âë£¬1²åÈë³É¹¦ÇÒkey²»´æÔÚ£¬0Î´²åÈë£¬key´æÔÚ
+		 * @return long çŠ¶æ€ç ï¼Œ1æ’å…¥æˆåŠŸä¸”keyä¸å­˜åœ¨ï¼Œ0æœªæ’å…¥ï¼Œkeyå­˜åœ¨
 		 * */
 		public long setnx(String key, String value) {
 			Jedis jedis = getJedis();
@@ -843,37 +843,37 @@ public class JedisUtil {
 		}
 
 		/**
-		 * Ìí¼Ó¼ÇÂ¼,Èç¹û¼ÇÂ¼ÒÑ´æÔÚ½«¸²¸ÇÔ­ÓĞµÄvalue
+		 * æ·»åŠ è®°å½•,å¦‚æœè®°å½•å·²å­˜åœ¨å°†è¦†ç›–åŸæœ‰çš„value
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
 		 *            value
-		 * @return ×´Ì¬Âë
+		 * @return çŠ¶æ€ç 
 		 * */
 		public String set(String key, String value) {
 			return set(SafeEncoder.encode(key), SafeEncoder.encode(value));
 		}
 
 		/**
-		 * Ìí¼Ó¼ÇÂ¼,Èç¹û¼ÇÂ¼ÒÑ´æÔÚ½«¸²¸ÇÔ­ÓĞµÄvalue
+		 * æ·»åŠ è®°å½•,å¦‚æœè®°å½•å·²å­˜åœ¨å°†è¦†ç›–åŸæœ‰çš„value
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
 		 *            value
-		 * @return ×´Ì¬Âë
+		 * @return çŠ¶æ€ç 
 		 * */
 		public String set(String key, byte[] value) {
 			return set(SafeEncoder.encode(key), value);
 		}
 
 		/**
-		 * Ìí¼Ó¼ÇÂ¼,Èç¹û¼ÇÂ¼ÒÑ´æÔÚ½«¸²¸ÇÔ­ÓĞµÄvalue
+		 * æ·»åŠ è®°å½•,å¦‚æœè®°å½•å·²å­˜åœ¨å°†è¦†ç›–åŸæœ‰çš„value
 		 * 
 		 * @param byte[] key
 		 * @param byte[] value
-		 * @return ×´Ì¬Âë
+		 * @return çŠ¶æ€ç 
 		 * */
 		public String set(byte[] key, byte[] value) {
 			Jedis jedis = getJedis();
@@ -883,16 +883,16 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ´ÓÖ¸¶¨Î»ÖÃ¿ªÊ¼²åÈëÊı¾İ£¬²åÈëµÄÊı¾İ»á¸²¸ÇÖ¸¶¨Î»ÖÃÒÔºóµÄÊı¾İ<br/>
-		 * Àı:String str1="123456789";<br/>
-		 * ¶Ôstr1²Ù×÷ºósetRange(key,4,0000)£¬str1="123400009";
+		 * ä»æŒ‡å®šä½ç½®å¼€å§‹æ’å…¥æ•°æ®ï¼Œæ’å…¥çš„æ•°æ®ä¼šè¦†ç›–æŒ‡å®šä½ç½®ä»¥åçš„æ•°æ®<br/>
+		 * ä¾‹:String str1="123456789";<br/>
+		 * å¯¹str1æ“ä½œåsetRange(key,4,0000)ï¼Œstr1="123400009";
 		 * 
 		 * @param String
 		 *            key
 		 * @param long offset
 		 * @param String
 		 *            value
-		 * @return long valueµÄ³¤¶È
+		 * @return long valueçš„é•¿åº¦
 		 * */
 		public long setRange(String key, long offset, String value) {
 			Jedis jedis = getJedis();
@@ -902,13 +902,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÔÚÖ¸¶¨µÄkeyÖĞ×·¼Óvalue
+		 * åœ¨æŒ‡å®šçš„keyä¸­è¿½åŠ value
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
 		 *            value
-		 * @return long ×·¼ÓºóvalueµÄ³¤¶È
+		 * @return long è¿½åŠ åvalueçš„é•¿åº¦
 		 * **/
 		public long append(String key, String value) {
 			Jedis jedis = getJedis();
@@ -918,12 +918,12 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ½«key¶ÔÓ¦µÄvalue¼õÈ¥Ö¸¶¨µÄÖµ£¬Ö»ÓĞvalue¿ÉÒÔ×ªÎªÊı×ÖÊ±¸Ã·½·¨²Å¿ÉÓÃ
+		 * å°†keyå¯¹åº”çš„valueå‡å»æŒ‡å®šçš„å€¼ï¼Œåªæœ‰valueå¯ä»¥è½¬ä¸ºæ•°å­—æ—¶è¯¥æ–¹æ³•æ‰å¯ç”¨
 		 * 
 		 * @param String
 		 *            key
-		 * @param long number Òª¼õÈ¥µÄÖµ
-		 * @return long ¼õÖ¸¶¨ÖµºóµÄÖµ
+		 * @param long number è¦å‡å»çš„å€¼
+		 * @return long å‡æŒ‡å®šå€¼åçš„å€¼
 		 * */
 		public long decrBy(String key, long number) {
 			Jedis jedis = getJedis();
@@ -933,13 +933,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * <b>¿ÉÒÔ×÷Îª»ñÈ¡Î¨Ò»idµÄ·½·¨</b><br/>
-		 * ½«key¶ÔÓ¦µÄvalue¼ÓÉÏÖ¸¶¨µÄÖµ£¬Ö»ÓĞvalue¿ÉÒÔ×ªÎªÊı×ÖÊ±¸Ã·½·¨²Å¿ÉÓÃ
+		 * <b>å¯ä»¥ä½œä¸ºè·å–å”¯ä¸€idçš„æ–¹æ³•</b><br/>
+		 * å°†keyå¯¹åº”çš„valueåŠ ä¸ŠæŒ‡å®šçš„å€¼ï¼Œåªæœ‰valueå¯ä»¥è½¬ä¸ºæ•°å­—æ—¶è¯¥æ–¹æ³•æ‰å¯ç”¨
 		 * 
 		 * @param String
 		 *            key
-		 * @param long number Òª¼õÈ¥µÄÖµ
-		 * @return long Ïà¼ÓºóµÄÖµ
+		 * @param long number è¦å‡å»çš„å€¼
+		 * @return long ç›¸åŠ åçš„å€¼
 		 * */
 		public long incrBy(String key, long number) {
 			Jedis jedis = getJedis();
@@ -949,13 +949,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ¶ÔÖ¸¶¨key¶ÔÓ¦µÄvalue½øĞĞ½ØÈ¡
+		 * å¯¹æŒ‡å®škeyå¯¹åº”çš„valueè¿›è¡Œæˆªå–
 		 * 
 		 * @param String
 		 *            key
-		 * @param long startOffset ¿ªÊ¼Î»ÖÃ(°üº¬)
-		 * @param long endOffset ½áÊøÎ»ÖÃ(°üº¬)
-		 * @return String ½ØÈ¡µÄÖµ
+		 * @param long startOffset å¼€å§‹ä½ç½®(åŒ…å«)
+		 * @param long endOffset ç»“æŸä½ç½®(åŒ…å«)
+		 * @return String æˆªå–çš„å€¼
 		 * */
 		public String getrange(String key, long startOffset, long endOffset) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -966,14 +966,14 @@ public class JedisUtil {
 		}
 
 		/**
-		 * »ñÈ¡²¢ÉèÖÃÖ¸¶¨key¶ÔÓ¦µÄvalue<br/>
-		 * Èç¹ûkey´æÔÚ·µ»ØÖ®Ç°µÄvalue,·ñÔò·µ»Ønull
+		 * è·å–å¹¶è®¾ç½®æŒ‡å®škeyå¯¹åº”çš„value<br/>
+		 * å¦‚æœkeyå­˜åœ¨è¿”å›ä¹‹å‰çš„value,å¦åˆ™è¿”å›null
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
 		 *            value
-		 * @return String Ô­Ê¼value»ònull
+		 * @return String åŸå§‹valueæˆ–null
 		 * */
 		public String getSet(String key, String value) {
 			Jedis jedis = getJedis();
@@ -983,11 +983,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÅúÁ¿»ñÈ¡¼ÇÂ¼,Èç¹ûÖ¸¶¨µÄkey²»´æÔÚ·µ»ØListµÄ¶ÔÓ¦Î»ÖÃ½«ÊÇnull
+		 * æ‰¹é‡è·å–è®°å½•,å¦‚æœæŒ‡å®šçš„keyä¸å­˜åœ¨è¿”å›Listçš„å¯¹åº”ä½ç½®å°†æ˜¯null
 		 * 
 		 * @param String
 		 *            keys
-		 * @return List<String> ÖµµÃ¼¯ºÏ
+		 * @return List<String> å€¼å¾—é›†åˆ
 		 * */
 		public List<String> mget(String... keys) {
 			Jedis jedis = getJedis();
@@ -997,11 +997,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÅúÁ¿´æ´¢¼ÇÂ¼
+		 * æ‰¹é‡å­˜å‚¨è®°å½•
 		 * 
 		 * @param String
-		 *            keysvalues Àı:keysvalues="key1","value1","key2","value2";
-		 * @return String ×´Ì¬Âë
+		 *            keysvalues ä¾‹:keysvalues="key1","value1","key2","value2";
+		 * @return String çŠ¶æ€ç 
 		 * */
 		public String mset(String... keysvalues) {
 			Jedis jedis = getJedis();
@@ -1011,11 +1011,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * »ñÈ¡key¶ÔÓ¦µÄÖµµÄ³¤¶È
+		 * è·å–keyå¯¹åº”çš„å€¼çš„é•¿åº¦
 		 * 
 		 * @param String
 		 *            key
-		 * @return valueÖµµÃ³¤¶È
+		 * @return valueå€¼å¾—é•¿åº¦
 		 * */
 		public long strlen(String key) {
 			Jedis jedis = getJedis();
@@ -1028,21 +1028,21 @@ public class JedisUtil {
 	// *******************************************Lists*******************************************//
 	public class Lists {
 		/**
-		 * List³¤¶È
+		 * Listé•¿åº¦
 		 * 
 		 * @param String
 		 *            key
-		 * @return ³¤¶È
+		 * @return é•¿åº¦
 		 * */
 		public long llen(String key) {
 			return llen(SafeEncoder.encode(key));
 		}
 
 		/**
-		 * List³¤¶È
+		 * Listé•¿åº¦
 		 * 
 		 * @param byte[] key
-		 * @return ³¤¶È
+		 * @return é•¿åº¦
 		 * */
 		public long llen(byte[] key) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -1053,12 +1053,12 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ¸²¸Ç²Ù×÷,½«¸²¸ÇListÖĞÖ¸¶¨Î»ÖÃµÄÖµ
+		 * è¦†ç›–æ“ä½œ,å°†è¦†ç›–Listä¸­æŒ‡å®šä½ç½®çš„å€¼
 		 * 
 		 * @param byte[] key
-		 * @param int index Î»ÖÃ
-		 * @param byte[] value Öµ
-		 * @return ×´Ì¬Âë
+		 * @param int index ä½ç½®
+		 * @param byte[] value å€¼
+		 * @return çŠ¶æ€ç 
 		 * */
 		public String lset(byte[] key, int index, byte[] value) {
 			Jedis jedis = getJedis();
@@ -1068,13 +1068,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ¸²¸Ç²Ù×÷,½«¸²¸ÇListÖĞÖ¸¶¨Î»ÖÃµÄÖµ
+		 * è¦†ç›–æ“ä½œ,å°†è¦†ç›–Listä¸­æŒ‡å®šä½ç½®çš„å€¼
 		 * 
 		 * @param key
-		 * @param int index Î»ÖÃ
+		 * @param int index ä½ç½®
 		 * @param String
-		 *            value Öµ
-		 * @return ×´Ì¬Âë
+		 *            value å€¼
+		 * @return çŠ¶æ€ç 
 		 * */
 		public String lset(String key, int index, String value) {
 			return lset(SafeEncoder.encode(key), index,
@@ -1082,16 +1082,16 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÔÚvalueµÄÏà¶ÔÎ»ÖÃ²åÈë¼ÇÂ¼
+		 * åœ¨valueçš„ç›¸å¯¹ä½ç½®æ’å…¥è®°å½•
 		 * 
 		 * @param key
 		 * @param LIST_POSITION
-		 *            Ç°Ãæ²åÈë»òºóÃæ²åÈë
+		 *            å‰é¢æ’å…¥æˆ–åé¢æ’å…¥
 		 * @param String
-		 *            pivot Ïà¶ÔÎ»ÖÃµÄÄÚÈİ
+		 *            pivot ç›¸å¯¹ä½ç½®çš„å†…å®¹
 		 * @param String
-		 *            value ²åÈëµÄÄÚÈİ
-		 * @return ¼ÇÂ¼×ÜÊı
+		 *            value æ’å…¥çš„å†…å®¹
+		 * @return è®°å½•æ€»æ•°
 		 * */
 		public long linsert(String key, LIST_POSITION where, String pivot,
 				String value) {
@@ -1100,15 +1100,15 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÔÚÖ¸¶¨Î»ÖÃ²åÈë¼ÇÂ¼
+		 * åœ¨æŒ‡å®šä½ç½®æ’å…¥è®°å½•
 		 * 
 		 * @param String
 		 *            key
 		 * @param LIST_POSITION
-		 *            Ç°Ãæ²åÈë»òºóÃæ²åÈë
-		 * @param byte[] pivot Ïà¶ÔÎ»ÖÃµÄÄÚÈİ
-		 * @param byte[] value ²åÈëµÄÄÚÈİ
-		 * @return ¼ÇÂ¼×ÜÊı
+		 *            å‰é¢æ’å…¥æˆ–åé¢æ’å…¥
+		 * @param byte[] pivot ç›¸å¯¹ä½ç½®çš„å†…å®¹
+		 * @param byte[] value æ’å…¥çš„å†…å®¹
+		 * @return è®°å½•æ€»æ•°
 		 * */
 		public long linsert(byte[] key, LIST_POSITION where, byte[] pivot,
 				byte[] value) {
@@ -1119,23 +1119,23 @@ public class JedisUtil {
 		}
 
 		/**
-		 * »ñÈ¡ListÖĞÖ¸¶¨Î»ÖÃµÄÖµ
+		 * è·å–Listä¸­æŒ‡å®šä½ç½®çš„å€¼
 		 * 
 		 * @param String
 		 *            key
-		 * @param int index Î»ÖÃ
-		 * @return Öµ
+		 * @param int index ä½ç½®
+		 * @return å€¼
 		 * **/
 		public String lindex(String key, int index) {
 			return SafeEncoder.encode(lindex(SafeEncoder.encode(key), index));
 		}
 
 		/**
-		 * »ñÈ¡ListÖĞÖ¸¶¨Î»ÖÃµÄÖµ
+		 * è·å–Listä¸­æŒ‡å®šä½ç½®çš„å€¼
 		 * 
 		 * @param byte[] key
-		 * @param int index Î»ÖÃ
-		 * @return Öµ
+		 * @param int index ä½ç½®
+		 * @return å€¼
 		 * **/
 		public byte[] lindex(byte[] key, int index) {
 			// ShardedJedis sjedis = getShardedJedis();
@@ -1146,21 +1146,21 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ½«ListÖĞµÄµÚÒ»Ìõ¼ÇÂ¼ÒÆ³öList
+		 * å°†Listä¸­çš„ç¬¬ä¸€æ¡è®°å½•ç§»å‡ºList
 		 * 
 		 * @param String
 		 *            key
-		 * @return ÒÆ³öµÄ¼ÇÂ¼
+		 * @return ç§»å‡ºçš„è®°å½•
 		 * */
 		public String lpop(String key) {
 			return SafeEncoder.encode(lpop(SafeEncoder.encode(key)));
 		}
 
 		/**
-		 * ½«ListÖĞµÄµÚÒ»Ìõ¼ÇÂ¼ÒÆ³öList
+		 * å°†Listä¸­çš„ç¬¬ä¸€æ¡è®°å½•ç§»å‡ºList
 		 * 
 		 * @param byte[] key
-		 * @return ÒÆ³öµÄ¼ÇÂ¼
+		 * @return ç§»å‡ºçš„è®°å½•
 		 * */
 		public byte[] lpop(byte[] key) {
 			Jedis jedis = getJedis();
@@ -1170,10 +1170,10 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ½«ListÖĞ×îºóµÚÒ»Ìõ¼ÇÂ¼ÒÆ³öList
+		 * å°†Listä¸­æœ€åç¬¬ä¸€æ¡è®°å½•ç§»å‡ºList
 		 * 
 		 * @param byte[] key
-		 * @return ÒÆ³öµÄ¼ÇÂ¼
+		 * @return ç§»å‡ºçš„è®°å½•
 		 * */
 		public String rpop(String key) {
 			Jedis jedis = getJedis();
@@ -1183,26 +1183,26 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÏòListÎ²²¿×·¼Ó¼ÇÂ¼
+		 * å‘Listå°¾éƒ¨è¿½åŠ è®°å½•
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
 		 *            value
-		 * @return ¼ÇÂ¼×ÜÊı
+		 * @return è®°å½•æ€»æ•°
 		 * */
 		public long lpush(String key, String value) {
 			return lpush(SafeEncoder.encode(key), SafeEncoder.encode(value));
 		}
 
 		/**
-		 * ÏòListÍ·²¿×·¼Ó¼ÇÂ¼
+		 * å‘Listå¤´éƒ¨è¿½åŠ è®°å½•
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
 		 *            value
-		 * @return ¼ÇÂ¼×ÜÊı
+		 * @return è®°å½•æ€»æ•°
 		 * */
 		public long rpush(String key, String value) {
 			Jedis jedis = getJedis();
@@ -1212,13 +1212,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÏòListÍ·²¿×·¼Ó¼ÇÂ¼
+		 * å‘Listå¤´éƒ¨è¿½åŠ è®°å½•
 		 * 
 		 * @param String
 		 *            key
 		 * @param String
 		 *            value
-		 * @return ¼ÇÂ¼×ÜÊı
+		 * @return è®°å½•æ€»æ•°
 		 * */
 		public long rpush(byte[] key, byte[] value) {
 			Jedis jedis = getJedis();
@@ -1228,11 +1228,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ÏòListÖĞ×·¼Ó¼ÇÂ¼
+		 * å‘Listä¸­è¿½åŠ è®°å½•
 		 * 
 		 * @param byte[] key
 		 * @param byte[] value
-		 * @return ¼ÇÂ¼×ÜÊı
+		 * @return è®°å½•æ€»æ•°
 		 * */
 		public long lpush(byte[] key, byte[] value) {
 			Jedis jedis = getJedis();
@@ -1242,7 +1242,7 @@ public class JedisUtil {
 		}
 
 		/**
-		 * »ñÈ¡Ö¸¶¨·¶Î§µÄ¼ÇÂ¼£¬¿ÉÒÔ×öÎª·ÖÒ³Ê¹ÓÃ
+		 * è·å–æŒ‡å®šèŒƒå›´çš„è®°å½•ï¼Œå¯ä»¥åšä¸ºåˆ†é¡µä½¿ç”¨
 		 * 
 		 * @param String
 		 *            key
@@ -1259,11 +1259,11 @@ public class JedisUtil {
 		}
 
 		/**
-		 * »ñÈ¡Ö¸¶¨·¶Î§µÄ¼ÇÂ¼£¬¿ÉÒÔ×öÎª·ÖÒ³Ê¹ÓÃ
+		 * è·å–æŒ‡å®šèŒƒå›´çš„è®°å½•ï¼Œå¯ä»¥åšä¸ºåˆ†é¡µä½¿ç”¨
 		 * 
 		 * @param byte[] key
 		 * @param int start
-		 * @param int end Èç¹ûÎª¸ºÊı£¬ÔòÎ²²¿¿ªÊ¼¼ÆËã
+		 * @param int end å¦‚æœä¸ºè´Ÿæ•°ï¼Œåˆ™å°¾éƒ¨å¼€å§‹è®¡ç®—
 		 * @return List
 		 * */
 		public List<byte[]> lrange(byte[] key, int start, int end) {
@@ -1275,12 +1275,12 @@ public class JedisUtil {
 		}
 
 		/**
-		 * É¾³ıListÖĞcÌõ¼ÇÂ¼£¬±»É¾³ıµÄ¼ÇÂ¼ÖµÎªvalue
+		 * åˆ é™¤Listä¸­cæ¡è®°å½•ï¼Œè¢«åˆ é™¤çš„è®°å½•å€¼ä¸ºvalue
 		 * 
 		 * @param byte[] key
-		 * @param int c ÒªÉ¾³ıµÄÊıÁ¿£¬Èç¹ûÎª¸ºÊıÔò´ÓListµÄÎ²²¿¼ì²é²¢É¾³ı·ûºÏµÄ¼ÇÂ¼
-		 * @param byte[] value ÒªÆ¥ÅäµÄÖµ
-		 * @return É¾³ıºóµÄListÖĞµÄ¼ÇÂ¼Êı
+		 * @param int c è¦åˆ é™¤çš„æ•°é‡ï¼Œå¦‚æœä¸ºè´Ÿæ•°åˆ™ä»Listçš„å°¾éƒ¨æ£€æŸ¥å¹¶åˆ é™¤ç¬¦åˆçš„è®°å½•
+		 * @param byte[] value è¦åŒ¹é…çš„å€¼
+		 * @return åˆ é™¤åçš„Listä¸­çš„è®°å½•æ•°
 		 * */
 		public long lrem(byte[] key, int c, byte[] value) {
 			Jedis jedis = getJedis();
@@ -1290,26 +1290,26 @@ public class JedisUtil {
 		}
 
 		/**
-		 * É¾³ıListÖĞcÌõ¼ÇÂ¼£¬±»É¾³ıµÄ¼ÇÂ¼ÖµÎªvalue
+		 * åˆ é™¤Listä¸­cæ¡è®°å½•ï¼Œè¢«åˆ é™¤çš„è®°å½•å€¼ä¸ºvalue
 		 * 
 		 * @param String
 		 *            key
-		 * @param int c ÒªÉ¾³ıµÄÊıÁ¿£¬Èç¹ûÎª¸ºÊıÔò´ÓListµÄÎ²²¿¼ì²é²¢É¾³ı·ûºÏµÄ¼ÇÂ¼
+		 * @param int c è¦åˆ é™¤çš„æ•°é‡ï¼Œå¦‚æœä¸ºè´Ÿæ•°åˆ™ä»Listçš„å°¾éƒ¨æ£€æŸ¥å¹¶åˆ é™¤ç¬¦åˆçš„è®°å½•
 		 * @param String
-		 *            value ÒªÆ¥ÅäµÄÖµ
-		 * @return É¾³ıºóµÄListÖĞµÄ¼ÇÂ¼Êı
+		 *            value è¦åŒ¹é…çš„å€¼
+		 * @return åˆ é™¤åçš„Listä¸­çš„è®°å½•æ•°
 		 * */
 		public long lrem(String key, int c, String value) {
 			return lrem(SafeEncoder.encode(key), c, SafeEncoder.encode(value));
 		}
 
 		/**
-		 * ËãÊÇÉ¾³ı°É£¬Ö»±£ÁôstartÓëendÖ®¼äµÄ¼ÇÂ¼
+		 * ç®—æ˜¯åˆ é™¤å§ï¼Œåªä¿ç•™startä¸endä¹‹é—´çš„è®°å½•
 		 * 
 		 * @param byte[] key
-		 * @param int start ¼ÇÂ¼µÄ¿ªÊ¼Î»ÖÃ(0±íÊ¾µÚÒ»Ìõ¼ÇÂ¼)
-		 * @param int end ¼ÇÂ¼µÄ½áÊøÎ»ÖÃ£¨Èç¹ûÎª-1Ôò±íÊ¾×îºóÒ»¸ö£¬-2£¬-3ÒÔ´ËÀàÍÆ£©
-		 * @return Ö´ĞĞ×´Ì¬Âë
+		 * @param int start è®°å½•çš„å¼€å§‹ä½ç½®(0è¡¨ç¤ºç¬¬ä¸€æ¡è®°å½•)
+		 * @param int end è®°å½•çš„ç»“æŸä½ç½®ï¼ˆå¦‚æœä¸º-1åˆ™è¡¨ç¤ºæœ€åä¸€ä¸ªï¼Œ-2ï¼Œ-3ä»¥æ­¤ç±»æ¨ï¼‰
+		 * @return æ‰§è¡ŒçŠ¶æ€ç 
 		 * */
 		public String ltrim(byte[] key, int start, int end) {
 			Jedis jedis = getJedis();
@@ -1319,13 +1319,13 @@ public class JedisUtil {
 		}
 
 		/**
-		 * ËãÊÇÉ¾³ı°É£¬Ö»±£ÁôstartÓëendÖ®¼äµÄ¼ÇÂ¼
+		 * ç®—æ˜¯åˆ é™¤å§ï¼Œåªä¿ç•™startä¸endä¹‹é—´çš„è®°å½•
 		 * 
 		 * @param String
 		 *            key
-		 * @param int start ¼ÇÂ¼µÄ¿ªÊ¼Î»ÖÃ(0±íÊ¾µÚÒ»Ìõ¼ÇÂ¼)
-		 * @param int end ¼ÇÂ¼µÄ½áÊøÎ»ÖÃ£¨Èç¹ûÎª-1Ôò±íÊ¾×îºóÒ»¸ö£¬-2£¬-3ÒÔ´ËÀàÍÆ£©
-		 * @return Ö´ĞĞ×´Ì¬Âë
+		 * @param int start è®°å½•çš„å¼€å§‹ä½ç½®(0è¡¨ç¤ºç¬¬ä¸€æ¡è®°å½•)
+		 * @param int end è®°å½•çš„ç»“æŸä½ç½®ï¼ˆå¦‚æœä¸º-1åˆ™è¡¨ç¤ºæœ€åä¸€ä¸ªï¼Œ-2ï¼Œ-3ä»¥æ­¤ç±»æ¨ï¼‰
+		 * @return æ‰§è¡ŒçŠ¶æ€ç 
 		 * */
 		public String ltrim(String key, int start, int end) {
 			return ltrim(SafeEncoder.encode(key), start, end);

@@ -1,14 +1,14 @@
-package com.gdxx.beans;
+package com.gdxx.base;
+
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
-public class Step {
+@Getter
+public class Route {
 	private String distance;
 	private String duration;
-	private String instruction;
-	private Vehicle vehicle;
-
+	private List<Step> steps;
 }

@@ -1,4 +1,4 @@
-package com.gdxx.beans;
+package com.gdxx.base;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

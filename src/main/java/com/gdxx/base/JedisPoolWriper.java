@@ -1,4 +1,4 @@
-package com.gdxx.beans;
+package com.gdxx.base;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +14,7 @@ public class JedisPoolWriper {
 
 	public JedisPoolWriper(final JedisPoolConfig poolConfig, final String host, final int port) {
 		try {
-			jedisPool = new JedisPool(poolConfig, host, port);
+			jedisPool = new JedisPool(poolConfig, host, port,10000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

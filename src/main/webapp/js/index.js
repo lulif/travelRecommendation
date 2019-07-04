@@ -22,6 +22,7 @@ $(function() {
 						: (("00" + o[k]).substr(("" + o[k]).length)));
 		return fmt;
 	}
+
 	 var time = new Date().Format("yyyy-MM-dd hh:mm");	
 	 var t=time.split(" ");
 	 var t1=t[0].split("-");
@@ -76,5 +77,4 @@ $(function() {
 		 })
 	        $.openPanel('#panel-left-demo');
 	    });
-
 })
