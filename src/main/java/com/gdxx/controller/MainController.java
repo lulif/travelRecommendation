@@ -36,8 +36,8 @@ public class MainController {
     @PostMapping("/checkSearchMsg")
     private ApiResponse getSearchMsg(@Valid SearchParam searchParam, BindingResult bindingResult) throws UnsupportedEncodingException {
         // Test 防止定位失败
-        searchParam.setCurrentLatitude("39.9916376781");
-        searchParam.setCurrentLongitude("116.2700219427");
+        searchParam.setCurrentLatitude("40.0755");
+        searchParam.setCurrentLongitude("116.286");
 
         if (bindingResult.hasErrors()) {
             return ApiResponse.ofStatus(ApiResponse.Status.NOT_VALID_PARAM);

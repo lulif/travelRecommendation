@@ -105,6 +105,9 @@
 	</logger>
 
 	<root level="info">
-		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="debugAppender" />
+		<appender-ref ref="infoAppender" />
+		<appender-ref ref="errorAppender" />
+<!--		<appender-ref ref="consoleAppender" />-->
 	</root>
 </configuration>

@@ -1,7 +1,6 @@
 package com.gdxx.utils;
 
 import com.gdxx.base.BaiduLine;
-import com.gdxx.base.BusBaiDuLine;
 import com.google.gson.Gson;
 
 /*
@@ -32,16 +31,6 @@ public class BaiDuUtil {
 		return walkLine;
 	}
 
-	// 公交/地铁路线(未使用)
-	public static BusBaiDuLine BusRotePlanning(Double originLat, Double originLng, Double terminalLat,
-			Double terminalLng) {
-		String url = "http://api.map.baidu.com/directionlite/v1/transit?origin=" + originLat + "," + originLng
-				+ "&destination=" + terminalLat + "," + terminalLng + "&ak=" + AK;
-		String message = HttpsRequestUtil.httpsRequest(url, "GET", null);
-		Gson gson = new Gson();
-		BusBaiDuLine busLine = gson.fromJson(message, BusBaiDuLine.class);
-		return busLine;
-	}
 
 	// public static void main(String[] args) throws Exception {
 	//// BusBaiDuLine line = BusRotePlanning(39.9916376781, 116.2700219427,

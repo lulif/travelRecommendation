@@ -71,7 +71,7 @@ public class DESUtil {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(getEncryptString("admin"));
+		System.out.println(getEncryptString("root"));
 		System.out.println(getEncryptString("llf952634"));	
 	}
 }
