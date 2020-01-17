@@ -24,7 +24,7 @@ jQuery(function() {
 					jQuery(e).children(".progress_btn_ec").css('left', left);
 					jQuery(e).find(".progress_bar_ec").width(left);
 					jQuery(e).children(".text_ec").html(
-							parseInt((left / progress_width) * 100) + '%');
+							parseInt((left / progress_width) * 100));
 				}
 			});
 
@@ -43,7 +43,7 @@ jQuery(function() {
 						width : left
 					}, progress_width);
 					jQuery('.text_ec').html(
-							parseInt((left / progress_width) * 100) + '%');
+							parseInt((left / progress_width) * 100) );
 				}
 			});
 
@@ -68,7 +68,7 @@ jQuery(function() {
 		jQuery('.progress_bar_ec').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_ec').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_ec').html(parseInt((left / progress_width) * 100) );
 	});
 
 	jQuery("#ec2").click(function() {
@@ -90,7 +90,7 @@ jQuery(function() {
 		jQuery('.progress_bar_ec').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_ec').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_ec').html(parseInt((left / progress_width) * 100));
 	});
 
 });
@@ -107,7 +107,7 @@ jQuery(function() {
 		jQuery('.progress_bar_ec').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_ec').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_ec').html(parseInt((left / progress_width) * 100) );
 	});
 
 	jQuery(".add_img_ec").click(function(e) {
@@ -121,7 +121,7 @@ jQuery(function() {
 		jQuery('.progress_bar_ec').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_ec').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_ec').html(parseInt((left / progress_width) * 100) );
 	});
 
 });
@@ -152,7 +152,7 @@ jQuery(function() {
 					jQuery(e).children(".progress_btn_tt").css('left', left);
 					jQuery(e).find(".progress_bar_tt").width(left);
 					jQuery(e).children(".text_tt").html(
-							parseInt((left / progress_width) * 100) + '%');
+							parseInt((left / progress_width) * 100) );
 				}
 			});
 
@@ -171,7 +171,7 @@ jQuery(function() {
 						width : left
 					}, progress_width);
 					jQuery('.text_tt').html(
-							parseInt((left / progress_width) * 100) + '%');
+							parseInt((left / progress_width) * 100));
 				}
 			});
 
@@ -195,7 +195,7 @@ jQuery(function() {
 		jQuery('.progress_bar_tt').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_tt').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_tt').html(parseInt((left / progress_width) * 100) );
 	})
 
 	jQuery("#time2").click(function() {
@@ -218,7 +218,7 @@ jQuery(function() {
 		jQuery('.progress_bar_tt').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_tt').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_tt').html(parseInt((left / progress_width) * 100));
 	})
 });
 
@@ -234,7 +234,7 @@ jQuery(function() {
 		jQuery('.progress_bar_tt').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_tt').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_tt').html(parseInt((left / progress_width) * 100));
 	});
 
 	jQuery(".add_img_tt").click(function(e) {
@@ -248,7 +248,7 @@ jQuery(function() {
 		jQuery('.progress_bar_tt').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_tt').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_tt').html(parseInt((left / progress_width) * 100) );
 	});
 
 });
@@ -279,7 +279,7 @@ jQuery(function() {
 					jQuery(e).children(".progress_btn_ss").css('left', left);
 					jQuery(e).find(".progress_bar_ss").width(left);
 					jQuery(e).children(".text_ss").html(
-							parseInt((left / progress_width) * 100) + '%');
+							parseInt((left / progress_width) * 100) );
 				}
 			});
 
@@ -298,7 +298,7 @@ jQuery(function() {
 						width : left
 					}, progress_width);
 					jQuery('.text_ss').html(
-							parseInt((left / progress_width) * 100) + '%');
+							parseInt((left / progress_width) * 100) );
 				}
 			});
 
@@ -322,7 +322,7 @@ jQuery(function() {
 		jQuery('.progress_bar_ss').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_ss').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_ss').html(parseInt((left / progress_width) * 100) );
 
 	});
 
@@ -344,7 +344,7 @@ jQuery(function() {
 		jQuery('.progress_bar_ss').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_ss').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_ss').html(parseInt((left / progress_width) * 100) );
 
 	});
 });
@@ -361,7 +361,7 @@ jQuery(function() {
 		jQuery('.progress_bar_ss').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_ss').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_ss').html(parseInt((left / progress_width) * 100) );
 	});
 
 	jQuery(".add_img_ss").click(function(e) {
@@ -375,6 +375,6 @@ jQuery(function() {
 		jQuery('.progress_bar_ss').animate({
 			width : left
 		}, progress_width);
-		jQuery('.text_ss').html(parseInt((left / progress_width) * 100) + '%');
+		jQuery('.text_ss').html(parseInt((left / progress_width) * 100) );
 	});
 });

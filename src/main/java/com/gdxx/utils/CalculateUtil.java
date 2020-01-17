@@ -134,7 +134,7 @@ public class CalculateUtil {
 	}
 
 	public static int convertScore(String score) {
-		return Integer.valueOf(score.substring(0, score.length() - 1));
+		return Integer.valueOf(score.trim());
 	}
 
 }

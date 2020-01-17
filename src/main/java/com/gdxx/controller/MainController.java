@@ -35,7 +35,7 @@ public class MainController {
     // 查询参数校验
     @PostMapping("/checkSearchMsg")
     private ApiResponse getSearchMsg(@Valid SearchParam searchParam, BindingResult bindingResult) throws UnsupportedEncodingException {
-        // Test 防止定位失败
+        /** Test 北京某地点 **/
         searchParam.setCurrentLatitude("40.0755");
         searchParam.setCurrentLongitude("116.286");
 

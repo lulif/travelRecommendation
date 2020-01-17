@@ -18,13 +18,15 @@ import lombok.ToString;
 public class SearchParam {
 	private String currentLatitude;
 	private String currentLongitude;
-	@NotBlank(message = "出发地不可以为空")
+	@NotBlank
 	private String origin;
-	@NotBlank(message = "目的地不可以为空")
+	@NotBlank
 	private String terminal;
+	@NotBlank
 	private String departWay;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date departTime;
+
 	private String economicScore;
 	private String timeScore;
 	private String loadBearingScore;
